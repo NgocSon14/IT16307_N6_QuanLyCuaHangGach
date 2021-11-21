@@ -16,20 +16,19 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class NhaCungCapDao extends DAO<NhaCungCap, String>{
-    String SQL_Insert="insert into NHACUNGCAP values(?,?,?,?,?,?,?) ";
-    String SQL_Update="update NHACUNGCAP set MANHACUNGCAP=?,TENHACUNGCAP=?,DIACHI=?,SODIENTHOAI=?,EMAIL=?,THONGTINKHAC=?,TRANGTHAI=?";
-    String SQL_Delete="delete from NHACUNGCAP WHERE MANHACUNGCAP=?";
+   String SQL_Update="update NHACUNGCAP set TENNHACUNGCAP=?,DIACHI=?,SODIENTHOAI=?,EMAIL=?,THONGTINKHAC=?,TRANGTHAI=? where MANHACUNGCAP=?";
+   String SQL_Delete="update NHACUNGCAP set TRANGTHAI=0 where MANHACUNGCAP=?";
     String SQL_SelectAll="select*from NHACUNGCAP";
     String SQL_SelectID="select*from NHACUNGCAP where MANHACUNGCAP=?";
 
     @Override
     public void them(NhaCungCap entity) {
-         jdbcHelper.update(SQL_Insert, entity.getMaNhaCungCap(),entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai()); //To change body of generated methods, choose Tools | Templates.
+     
     }
 
     @Override
     public void capNhat(NhaCungCap entity) {
-       jdbcHelper.update(SQL_Update, entity.getMaNhaCungCap(),entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai());
+         jdbcHelper.update(SQL_Update, entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai(),entity.getMaNhaCungCap());
     }
 
     @Override
@@ -44,7 +43,7 @@ public class NhaCungCapDao extends DAO<NhaCungCap, String>{
 
     @Override
     public NhaCungCap selectByID(String key) {
-     ArrayList<NhaCungCap> listNCC= this.selectByID(SQL_SelectID,key); 
+     ArrayList<NhaCungCap> listNCC= this.selectBySql(SQL_SelectID,key); 
 if(listNCC.isEmpty()){
 return null;
 }else
@@ -71,10 +70,7 @@ listNCC.add(new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs
 //To change body of generated methods, choose Tools | Templates.
     }
 
-    private ArrayList<NhaCungCap> selectByID(String SQL_SelectID, String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
    
     
 
