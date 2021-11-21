@@ -73,7 +73,13 @@ public class DangNhapUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Quên mật khẩu ? ");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         btnHuy.setBackground(new java.awt.Color(51, 51, 51));
         btnHuy.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -200,6 +206,11 @@ public class DangNhapUI extends javax.swing.JFrame {
     private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        QuenMatKhau qmk = new QuenMatKhau();
+        qmk.setVisible(true);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
