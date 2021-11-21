@@ -76,6 +76,9 @@ public class NhaCungCap {
         this.ThongTinKhac = ThongTinKhac;
     }
 
+    public NhaCungCap() {
+    }
+
     public boolean isTrangThai() {
         return TrangThai;
     }
