@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Entity;
 
-/**
- *
- * @author Administrator
- */
+
 public class DonViTinh {
     private String maDonVi, tenDonVi;
 
@@ -35,11 +28,13 @@ public class DonViTinh {
     public void setTenDonVi(String tenDonVi) {
         this.tenDonVi = tenDonVi;
     }
-
+    
+    
     @Override
     public String toString() {
         return "DonViTinh{" + "maDonVi=" + maDonVi + ", tenDonVi=" + tenDonVi + '}';
     }
     
     
+
 }

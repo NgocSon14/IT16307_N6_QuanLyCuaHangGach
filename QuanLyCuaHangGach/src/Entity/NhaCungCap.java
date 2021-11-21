@@ -14,8 +14,19 @@ public class NhaCungCap {
     private String TenNhaCungCap;
     private String DiaChi;
     private String SDT;
+    private String Email;
     private String ThongTinKhac ;
     private boolean TrangThai;
+
+    public NhaCungCap(String MaNhaCungCap, String TenNhaCungCap, String DiaChi, String SDT, String Email, String ThongTinKhac, boolean TrangThai) {
+        this.MaNhaCungCap = MaNhaCungCap;
+        this.TenNhaCungCap = TenNhaCungCap;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.ThongTinKhac = ThongTinKhac;
+        this.TrangThai = TrangThai;
+    }
 
     public String getMaNhaCungCap() {
         return MaNhaCungCap;
@@ -49,12 +60,25 @@ public class NhaCungCap {
         this.SDT = SDT;
     }
 
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
     public String getThongTinKhac() {
         return ThongTinKhac;
     }
 
     public void setThongTinKhac(String ThongTinKhac) {
         this.ThongTinKhac = ThongTinKhac;
+    }
+
+
+    public NhaCungCap() {
     }
 
     public boolean isTrangThai() {
@@ -64,18 +88,10 @@ public class NhaCungCap {
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
-
+  
+  
     @Override
     public String toString() {
         return "NhaCungCap{" + "MaNhaCungCap=" + MaNhaCungCap + ", TenNhaCungCap=" + TenNhaCungCap + ", DiaChi=" + DiaChi + ", SDT=" + SDT + ", ThongTinKhac=" + ThongTinKhac + ", TrangThai=" + TrangThai + '}';
-    }
-
-    public NhaCungCap(String MaNhaCungCap, String TenNhaCungCap, String DiaChi, String SDT, String ThongTinKhac, boolean TrangThai) {
-        this.MaNhaCungCap = MaNhaCungCap;
-        this.TenNhaCungCap = TenNhaCungCap;
-        this.DiaChi = DiaChi;
-        this.SDT = SDT;
-        this.ThongTinKhac = ThongTinKhac;
-        this.TrangThai = TrangThai;
     }
 }
