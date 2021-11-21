@@ -18,12 +18,12 @@ import java.sql.ResultSet;
 public class NhaCungCapDao extends DAO<NhaCungCap, String>{
    String SQL_Update="update NHACUNGCAP set TENNHACUNGCAP=?,DIACHI=?,SODIENTHOAI=?,EMAIL=?,THONGTINKHAC=?,TRANGTHAI=? where MANHACUNGCAP=?";
    String SQL_Delete="update NHACUNGCAP set TRANGTHAI=0 where MANHACUNGCAP=?";
+
     String SQL_SelectAll="select*from NHACUNGCAP";
     String SQL_SelectID="select*from NHACUNGCAP where MANHACUNGCAP=?";
 
     @Override
     public void them(NhaCungCap entity) {
-     
     }
 
     @Override
@@ -44,6 +44,7 @@ public class NhaCungCapDao extends DAO<NhaCungCap, String>{
     @Override
     public NhaCungCap selectByID(String key) {
      ArrayList<NhaCungCap> listNCC= this.selectBySql(SQL_SelectID,key); 
+
 if(listNCC.isEmpty()){
 return null;
 }else
@@ -68,11 +69,5 @@ listNCC.add(new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs
             throw new RuntimeException(e);
         }
 //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-   
-    
-
-    
+    }  
 }
