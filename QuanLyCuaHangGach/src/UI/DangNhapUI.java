@@ -1,4 +1,3 @@
-
 package UI;
 
 import DAO.DangNhapDAO;
@@ -6,15 +5,14 @@ import Entity.TaiKhoan;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
-
 public class DangNhapUI extends javax.swing.JFrame {
 
     DangNhapDAO daoDn = new DangNhapDAO();
+
     public DangNhapUI() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,9 +29,16 @@ public class DangNhapUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< Updated upstream
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("ĐĂNG NHẬP");
+=======
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Anh/anhLogo1.jpg"))); // NOI18N
+>>>>>>> Stashed changes
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -82,7 +87,9 @@ public class DangNhapUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(351, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,6 +141,64 @@ public class DangNhapUI extends javax.swing.JFrame {
                     .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
+=======
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(ckbHienThiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(76, 76, 76))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(129, 129, 129))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ckbHienThiMatKhau)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
+            .addComponent(lblAnh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> Stashed changes
         );
 
         pack();
@@ -144,23 +209,23 @@ public class DangNhapUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-       String taiKhoan = this.txtTaiKhoan.getText();
-       String matKhau = new String(this.txtMatKhau.getText());
-       if(taiKhoan.length() == 0 || matKhau.length() == 0){
-           JOptionPane.showMessageDialog(this, "Không được để trống");
-           return;
-       }
+        String taiKhoan = this.txtTaiKhoan.getText();
+        String matKhau = new String(this.txtMatKhau.getText());
+        if (taiKhoan.length() == 0 || matKhau.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
+        }
         TaiKhoan tk = daoDn.selectByID(taiKhoan);
         try {
-            if(!tk.getTaiKhoan().trim().equalsIgnoreCase(taiKhoan.trim())){
+            if (!tk.getTaiKhoan().trim().equalsIgnoreCase(taiKhoan.trim())) {
                 JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại");
                 txtTaiKhoan.setBackground(Color.red);
                 return;
-            }else if(!tk.getMatKhau().trim().equalsIgnoreCase(matKhau.trim())){
+            } else if (!tk.getMatKhau().trim().equalsIgnoreCase(matKhau.trim())) {
                 JOptionPane.showMessageDialog(this, "Mật khẩu không đúng");
                 txtMatKhau.setBackground(Color.red);
                 return;
-            }else{
+            } else {
                 txtMatKhau.setBackground(Color.WHITE);
                 txtTaiKhoan.setBackground(Color.WHITE);
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
@@ -172,11 +237,11 @@ public class DangNhapUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void ckbHienThiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbHienThiMatKhauActionPerformed
-       if(ckbHienThiMatKhau.isSelected()){
-           txtMatKhau.setEchoChar((char)0);
-       }else{
-           txtMatKhau.setEchoChar('*');
-       }
+        if (ckbHienThiMatKhau.isSelected()) {
+            txtMatKhau.setEchoChar((char) 0);
+        } else {
+            txtMatKhau.setEchoChar('*');
+        }
     }//GEN-LAST:event_ckbHienThiMatKhauActionPerformed
 
     /**
