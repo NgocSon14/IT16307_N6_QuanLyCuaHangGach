@@ -66,6 +66,10 @@ public class PhieuNhapChiTiet {
         return GiaBan;
     }
 
+
+    public PhieuNhapChiTiet() {
+    }
+
     public void setGiaBan(float GiaBan) {
         this.GiaBan = GiaBan;
     }

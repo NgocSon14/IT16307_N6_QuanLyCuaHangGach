@@ -60,6 +60,7 @@ public class NhaCungCap {
         this.SDT = SDT;
     }
 
+
     public String getEmail() {
         return Email;
     }
@@ -76,6 +77,7 @@ public class NhaCungCap {
         this.ThongTinKhac = ThongTinKhac;
     }
 
+
     public NhaCungCap() {
     }
 
@@ -85,5 +87,11 @@ public class NhaCungCap {
 
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
+    }
+  
+  
+    @Override
+    public String toString() {
+        return "NhaCungCap{" + "MaNhaCungCap=" + MaNhaCungCap + ", TenNhaCungCap=" + TenNhaCungCap + ", DiaChi=" + DiaChi + ", SDT=" + SDT + ", ThongTinKhac=" + ThongTinKhac + ", TrangThai=" + TrangThai + '}';
     }
 }
