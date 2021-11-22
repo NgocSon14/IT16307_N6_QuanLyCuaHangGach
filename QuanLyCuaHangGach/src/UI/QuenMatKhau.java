@@ -154,7 +154,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
+       this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
