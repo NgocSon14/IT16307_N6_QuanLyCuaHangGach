@@ -188,6 +188,9 @@ public class DangNhapUI extends javax.swing.JFrame {
                 txtMatKhau.setBackground(Color.WHITE);
                 txtTaiKhoan.setBackground(Color.WHITE);
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                Main main = new Main();
+                main.setVisible(true);
+                this.dispose();
                 return;
             }
         } catch (Exception e) {
