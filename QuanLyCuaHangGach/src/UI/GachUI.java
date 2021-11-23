@@ -249,6 +249,68 @@ public class GachUI extends javax.swing.JFrame {
         }
     }
 
+    void timkiem() {
+        ArrayList<Gach> list = daogach.selectAll();
+        modelds.setRowCount(0);
+        for (Gach ncc : list) {
+            if (ncc.isTrangThai() && (ncc.getMaGach().toString().contains(tfttimkiem.getText().trim())
+                    || ncc.getTenGach().toString().contains(tfttimkiem.getText().trim())
+                    || ncc.getMaChatLieu().toString().contains(tfttimkiem.getText().trim())
+                    || ncc.getMaDv().toString().contains(tfttimkiem.getText().trim())
+                    || ncc.getMaTheLoai().toString().contains(tfttimkiem.getText().trim())
+                    || ncc.getSoLuong().toString().contains(tfttimkiem.getText().trim()))) {
+                modelds.addRow(new Object[]{ncc.getMaGach(), ncc.getTenGach(), ncc.getMaDv(), ncc.getSoLuong(), ncc.getMaChatLieu(), ncc.getMaNhaCungCap(), ncc.getMaTheLoai(), ncc.getAnh(), true});
+            }
+        }
+
+    }
+
+    boolean check() {
+        try {
+            
+            
+            if (tftmagach.getText().equals("")) {
+                MsgBox.alert(this, "Không để trống mã gạch");
+                tftmagach.requestFocus();
+                return false;
+            } else {
+                if (tfttengach.getText().equals("")) {
+                    MsgBox.alert(this, "Không để trống tên gạch");
+                    tfttengach.requestFocus();
+                    return false;
+                } else {
+                    if (tftsoluong.getText().equals("")) {
+                        MsgBox.alert(this, "Không để trống số lượng");
+                    }
+                    else{
+                        try {
+                            int t1=Integer.parseInt(tftsoluong.getText());
+                            if(t1<=0){
+                            MsgBox.alert(this, "Số lượng phải là số nguyên dương");
+                            tftsoluong.requestFocus();
+                            return false;
+                            }
+                        } catch (Exception e) {
+                            MsgBox.alert(this, "Số lượng phải là số");
+                            tftsoluong.requestFocus();
+                            return false;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+        return true;
+    }
+    boolean checktrung(){
+      Gach gach=daogach.selectByID(tftmagach.getText());
+      if(gach!=null){
+      MsgBox.alert(this, "Mã gạch đã tồn tại");
+      return false;
+      }
+      return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -327,6 +389,12 @@ public class GachUI extends javax.swing.JFrame {
         });
 
         jLabel6.setText("TÌM KIẾM");
+
+        tfttimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfttimkiemActionPerformed(evt);
+            }
+        });
 
         tblDS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -542,7 +610,9 @@ public class GachUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
-        insert();        // TODO add your handling code here:
+        if (check()&&checktrung()) {
+            insert();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btnchinhsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchinhsuaActionPerformed
@@ -571,6 +641,10 @@ public class GachUI extends javax.swing.JFrame {
             chonAnh();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_lblhinhanhMouseClicked
+
+    private void tfttimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfttimkiemActionPerformed
+        timkiem();        // TODO add your handling code here:
+    }//GEN-LAST:event_tfttimkiemActionPerformed
 
     /**
      * @param args the command line arguments
