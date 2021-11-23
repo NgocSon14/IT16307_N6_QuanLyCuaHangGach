@@ -249,6 +249,7 @@ public class GachUI extends javax.swing.JFrame {
         }
     }
 
+
     void timkiem() {
         ArrayList<Gach> list = daogach.selectAll();
         modelds.setRowCount(0);
@@ -389,6 +390,7 @@ public class GachUI extends javax.swing.JFrame {
         });
 
         jLabel6.setText("TÌM KIẾM");
+
 
         tfttimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -613,6 +615,7 @@ public class GachUI extends javax.swing.JFrame {
         if (check()&&checktrung()) {
             insert();
         }        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btnchinhsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchinhsuaActionPerformed
@@ -645,6 +648,7 @@ public class GachUI extends javax.swing.JFrame {
     private void tfttimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfttimkiemActionPerformed
         timkiem();        // TODO add your handling code here:
     }//GEN-LAST:event_tfttimkiemActionPerformed
+
 
     /**
      * @param args the command line arguments
