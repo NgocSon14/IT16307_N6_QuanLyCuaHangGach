@@ -5,17 +5,22 @@
  */
 package UI;
 
+import DAO.DangNhapDAO;
+import Entity.TaiKhoan;
 import Helper.MsgBox;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author Asus
- */
 public class QuenMatKhau extends javax.swing.JFrame {
 
-    /**
-     * Creates new form QuenMatKhau
-     */
+    DangNhapDAO daodn = new DangNhapDAO();
+
     public QuenMatKhau() {
         initComponents();
     }
@@ -154,16 +159,65 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         String taiKhoan = this.txtTaiKhoan.getText();
         String cccd = this.txtCccd.getText();
         String email = this.txtEmail.getText();
-        if(taiKhoan.equals("") || cccd.equals("") || email.equals("")){
+        if (taiKhoan.equals("") || cccd.equals("") || email.equals("")) {
             MsgBox.alert(this, "Không được để trống");
             return;
+        }
+        String ma = this.txtTaiKhoan.getText();
+        TaiKhoan tk = daodn.selectByID(ma);
+        if (tk.getCCCD().trim().equals(txtCccd.getText()) && tk.getEmail().trim().equals(txtEmail.getText())) {
+            final String username = "vanlongtnhh139@gmail.com";
+            final String password = "nhom6113";
+
+            Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
+            prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+            // đăng nhập gmail
+            Session session = Session.getInstance(prop,
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+            try {
+                double random = Math.random();
+                if (random < 0.1) {
+                    random += 0.1;
+                }
+                int code = (int) Math.round(random * 1000000);
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("sondnph17102@fpt.edu.vn"));
+                message.setRecipients(
+                        Message.RecipientType.TO,
+                        InternetAddress.parse(txtEmail.getText())
+                );
+                message.setSubject("MÃ XÁC NHẬN");
+                message.setText("Mã xác nhận của bạn là : " + code);
+
+                Transport.send(message);
+
+                MsgBox.alert(this, "Đã gửi mã vào email "+ txtEmail.getText());
+                String xacNhan = MsgBox.promt(this, "Mời bạn nhập mã xác nhận");
+                if(!xacNhan.trim().equals(code)){
+                    MsgBox.alert(this, "Mã xác nhận đúng");
+                }else{
+                    MsgBox.alert(this, "Mã xác nhận sai vui lòng nhập lại mã mới !");
+                }
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }else{
+            MsgBox.alert(this, "Nhập sai thông tin vui lòng nhập lại !");
         }
     }//GEN-LAST:event_btnDoiMKActionPerformed
 
