@@ -16,19 +16,19 @@ import java.sql.ResultSet;
 public class GachDAO extends DAO<Gach, String>{
     String INSERT_SQL = "INSERT INTO GACH(MAGACH,TENGACH,MADONVI,SOLUONG,MACHATLIEU,MATHELOAI,MANHACUNGCAP,ANH,TRANGTHAI) VALUES (?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE GACH SET TENGACH = ?,MADONVI=?,SOLUONG=?,MACHATLIEU=?,MATHELOAI=?,MANHACUNGCAP=?,ANH=?,TRANGTHAI=? WHERE MAGACH = ?";
-    String DELETE_SQL = "DELETE FROM GACH WHERE MAGACH = ?";
+    String DELETE_SQL = "update GACH set TRANGTHAI=0 where MAGACH=?";
     String SELECT_ALL_SQL = "SELECT * FROM GACH";
     String SELECT_BY_ID_SQL = "SELECT * FROM GACH WHERE MAGACH = ?";
     @Override
     public void them(Gach entity) {
         jdbcHelper.update(INSERT_SQL, entity.getMaGach(),entity.getTenGach(),entity.getMaDv(),entity.getSoLuong(),entity.getMaChatLieu(),entity.getMaTheLoai(),
-                entity.getMaNhaCungCap(),entity.getAnh(),entity.isTrangThai());
+                entity.getMaNhaCungCap(),entity.getAnh(),true);
     }
 
     @Override
     public void capNhat(Gach entity) {
         jdbcHelper.update(UPDATE_SQL,entity.getTenGach(),entity.getMaDv(),entity.getSoLuong(),entity.getMaChatLieu(),entity.getMaTheLoai(),
-                entity.getMaNhaCungCap(),entity.getAnh(),entity.isTrangThai(),entity.getMaGach());
+                entity.getMaNhaCungCap(),entity.getAnh(),true,entity.getMaGach());
     }
 
     @Override
