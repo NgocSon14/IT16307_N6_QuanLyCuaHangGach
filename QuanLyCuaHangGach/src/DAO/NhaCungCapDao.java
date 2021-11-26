@@ -21,9 +21,10 @@ public class NhaCungCapDao extends DAO<NhaCungCap, String>{
 
     String SQL_SelectAll="select*from NHACUNGCAP";
     String SQL_SelectID="select*from NHACUNGCAP where MANHACUNGCAP=?";
-
+    String SQL_INSERT = "INSERT INTO NHACUNGCAP(MANHACUNGCAP,TENNHACUNGCAP,DIACHI,SODIENTHOAI,EMAIL,THONGTINKHAC,TRANGTHAI) VALUES (?,?,?,?,?,?,?)";
     @Override
     public void them(NhaCungCap entity) {
+        jdbcHelper.update(SQL_INSERT, entity.getMaNhaCungCap(),entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai() == false);
     }
 
     @Override
