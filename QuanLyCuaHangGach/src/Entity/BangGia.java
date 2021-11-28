@@ -10,24 +10,16 @@ package Entity;
  * @author Administrator
  */
 public class BangGia {
-    private String maNhaCungCap, maGach;
-    private double gia;
+    private String  maGach,maNhaCungCap;
+    private float gia;
 
     public BangGia() {
     }
 
-    public BangGia(String maNhaCungCap, String maGach, double gia) {
-        this.maNhaCungCap = maNhaCungCap;
+    public BangGia(String maGach, String maNhaCungCap, float gia) {
         this.maGach = maGach;
-        this.gia = gia;
-    }
-
-    public String getMaNhaCungCap() {
-        return maNhaCungCap;
-    }
-
-    public void setMaNhaCungCap(String maNhaCungCap) {
         this.maNhaCungCap = maNhaCungCap;
+        this.gia = gia;
     }
 
     public String getMaGach() {
@@ -38,18 +30,30 @@ public class BangGia {
         this.maGach = maGach;
     }
 
-    public double getGia() {
+    public String getMaNhaCungCap() {
+        return maNhaCungCap;
+    }
+
+    public void setMaNhaCungCap(String maNhaCungCap) {
+        this.maNhaCungCap = maNhaCungCap;
+    }
+
+    public float getGia() {
         return gia;
     }
 
-    public void setGia(double gia) {
+    public void setGia(float gia) {
         this.gia = gia;
     }
 
     @Override
     public String toString() {
-        return "BangGia{" + "maNhaCungCap=" + maNhaCungCap + ", maGach=" + maGach + ", gia=" + gia + '}';
+        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + '}';
     }
+
+   
+
+   
     
     
 }
