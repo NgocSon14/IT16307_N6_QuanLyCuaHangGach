@@ -9,18 +9,22 @@ public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
 
     String SELECT_ALL_SQL = "select * from PHIEUNHAPCHITIET";
     String SELECT_BY_ID_SQL = "select * from PHIEUNHAPCHITIET where MAPHIEUNHAPCHITIET =?";
-    String INSERT_SQL = "insert into PHIEUNHAPCHITIET(MAPHIEUNHAPCHITIET,MAPHIEUNHAP,MAGACH,SOLUONG,GIANHAP,GIABAN) values(?,?,?,?,?,?)";
-    String DELETE_SQL = "delete PHIEUNHAPCHITIET where MAPHIEUNHAPCHITIET = ?";
+    String INSERT_SQL = "insert into PHIEUNHAPCHITIET(MAPHIEUNHAPCHITIET,MAPHIEUNHAP,MAGACH,SOLUONG,GIANHAP,GIABAN,TRANGTHAI) values(?,?,?,?,?,?,?)";
+    String DELETE_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAP = ?";
+    String DELETE_PNCT_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAPCHITIET = ?";
     String UPDATE_SQL = "update PHIEUNHAPCHITIET set MAPHIEUNHAP = ?, MAGACH = ?, SOLUONG=?, GIANHAP=?,GIABAN=? where MAPHIEUNHAPCHITIET = ?";
-
+    
+    public void XoaPnct(String key){
+        jdbcHelper.update(DELETE_PNCT_SQL, key);
+    }
     @Override
     public void them(PhieuNhapChiTiet entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuNhapChiTiet(),entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan());
+        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuNhapChiTiet(),entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan(),entity.isTrangThai() == false);
     }
 
     @Override
     public void capNhat(PhieuNhapChiTiet entity) {
-        jdbcHelper.update(UPDATE_SQL, entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan());
+        jdbcHelper.update(UPDATE_SQL, entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan(),entity.getMaPhieuNhapChiTiet());
     }
 
     @Override
@@ -50,12 +54,12 @@ public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
             while (rs.next()) {
                 PhieuNhapChiTiet entity = new PhieuNhapChiTiet();
                 entity.setMaPhieuNhapChiTiet(rs.getString("MAPHIEUNHAPCHITIET"));
-                entity.setMaPhieuNhap(rs.getString("MAPHIEUXUAT"));
+                entity.setMaPhieuNhap(rs.getString("MAPHIEUNHAP"));
                 entity.setMaGach(rs.getString("MAGACH"));
                 entity.setSoluong(rs.getInt("SOLUONG"));
                 entity.setGiaNhap(rs.getFloat("GIANHAP"));
                 entity.setGiaBan(rs.getFloat("GIABAN"));
-
+                entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

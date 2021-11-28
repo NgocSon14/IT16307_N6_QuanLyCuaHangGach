@@ -10,16 +10,26 @@ package Entity;
  * @author Admin
  */
 public class PhieuNhapChiTiet {
-    private String MaPhieuNhapChiTiet;
-    private String MaPhieuNhap;
-    private String MaGach;
-    private int Soluong;
-    private float GiaNhap;
-    private float GiaBan;
 
-    @Override
-    public String toString() {
-        return "PhieuNhapChiTiet{" + "MaPhieuNhapChiTiet=" + MaPhieuNhapChiTiet + ", MaPhieuNhap=" + MaPhieuNhap + ", MaGach=" + MaGach + ", Soluong=" + Soluong + ", GiaNhap=" + GiaNhap + ", GiaBan=" + GiaBan + '}';
+    private String MaPhieuNhapChiTiet;
+    private String maPhieuNhap;
+    private String maGach;
+    private int soluong;
+    private float giaNhap;
+    private float giaBan;
+    private boolean trangThai;
+
+    public PhieuNhapChiTiet() {
+    }
+
+    public PhieuNhapChiTiet(String MaPhieuNhapChiTiet, String maPhieuNhap, String maGach, int soluong, float giaNhap, float giaBan, boolean trangThai) {
+        this.MaPhieuNhapChiTiet = MaPhieuNhapChiTiet;
+        this.maPhieuNhap = maPhieuNhap;
+        this.maGach = maGach;
+        this.soluong = soluong;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+        this.trangThai = trangThai;
     }
 
     public String getMaPhieuNhapChiTiet() {
@@ -31,55 +41,53 @@ public class PhieuNhapChiTiet {
     }
 
     public String getMaPhieuNhap() {
-        return MaPhieuNhap;
+        return maPhieuNhap;
     }
 
-    public void setMaPhieuNhap(String MaPhieuNhap) {
-        this.MaPhieuNhap = MaPhieuNhap;
+    public void setMaPhieuNhap(String maPhieuNhap) {
+        this.maPhieuNhap = maPhieuNhap;
     }
 
     public String getMaGach() {
-        return MaGach;
+        return maGach;
     }
 
-    public void setMaGach(String MaGach) {
-        this.MaGach = MaGach;
+    public void setMaGach(String maGach) {
+        this.maGach = maGach;
     }
 
     public int getSoluong() {
-        return Soluong;
+        return soluong;
     }
 
-    public void setSoluong(int Soluong) {
-        this.Soluong = Soluong;
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public float getGiaNhap() {
-        return GiaNhap;
+        return giaNhap;
     }
 
-    public void setGiaNhap(float GiaNhap) {
-        this.GiaNhap = GiaNhap;
+    public void setGiaNhap(float giaNhap) {
+        this.giaNhap = giaNhap;
     }
 
     public float getGiaBan() {
-        return GiaBan;
+        return giaBan;
     }
 
-
-    public PhieuNhapChiTiet() {
+    public void setGiaBan(float giaBan) {
+        this.giaBan = giaBan;
     }
 
-    public void setGiaBan(float GiaBan) {
-        this.GiaBan = GiaBan;
+    public boolean isTrangThai() {
+        return trangThai;
     }
 
-    public PhieuNhapChiTiet(String MaPhieuNhapChiTiet, String MaPhieuNhap, String MaGach, int Soluong, float GiaNhap, float GiaBan) {
-        this.MaPhieuNhapChiTiet = MaPhieuNhapChiTiet;
-        this.MaPhieuNhap = MaPhieuNhap;
-        this.MaGach = MaGach;
-        this.Soluong = Soluong;
-        this.GiaNhap = GiaNhap;
-        this.GiaBan = GiaBan;
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
+
+    
+    
 }
