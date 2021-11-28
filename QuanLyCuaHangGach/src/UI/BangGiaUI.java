@@ -16,8 +16,8 @@ public class BangGiaUI extends javax.swing.JFrame {
     public BangGiaUI() {
         initComponents();
         setLocationRelativeTo(null);
-        prepareGui();
-        fill();
+        fillDS();
+        
     }
 
     /**
@@ -33,16 +33,15 @@ public class BangGiaUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         tabs = new javax.swing.JTabbedPane();
         tab1 = new javax.swing.JPanel();
-        txttimkien = new javax.swing.JTextField();
+        txtgiagach = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblbanggia = new javax.swing.JTable();
+        tbldanhsach = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        txtmanhacungcap1 = new javax.swing.JTextField();
-        lblmagach1 = new javax.swing.JLabel();
-        txtmagach1 = new javax.swing.JTextField();
-        lblgiagach1 = new javax.swing.JLabel();
-        txtgiagach1 = new javax.swing.JTextField();
-        lblmanhacungcap1 = new javax.swing.JLabel();
+        btncapnhapgia = new javax.swing.JButton();
+        txtmanhacungcap = new javax.swing.JTextField();
+        txtmagach = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,19 +57,20 @@ public class BangGiaUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bảng Giá");
 
-        txttimkien.addActionListener(new java.awt.event.ActionListener() {
+        txtgiagach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttimkienActionPerformed(evt);
+                txtgiagachActionPerformed(evt);
             }
         });
 
-        tblbanggia.setModel(new javax.swing.table.DefaultTableModel(
+        tbldanhsach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Gạch", "Giá Gạch", "Mã Nhà Cung Cấp"
+                "Mã Gạch", "Mã nhà cung cấp", "Giá Gạch"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -81,77 +81,81 @@ public class BangGiaUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblbanggia.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbldanhsach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblbanggiaMouseClicked(evt);
+                tbldanhsachMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblbanggia);
+        jScrollPane2.setViewportView(tbldanhsach);
 
-        jLabel4.setText("Tìm Kiếm");
+        jLabel4.setText("Giá Gạch");
 
-        lblmagach1.setText("Mã Gạch");
-
-        lblgiagach1.setText("Giá Gạch");
-
-        txtgiagach1.addActionListener(new java.awt.event.ActionListener() {
+        btncapnhapgia.setText("Cập nhập giá");
+        btncapnhapgia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtgiagach1ActionPerformed(evt);
+                btncapnhapgiaActionPerformed(evt);
             }
         });
 
-        lblmanhacungcap1.setText("Mã nhà cung cấp");
+        txtmanhacungcap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmanhacungcapActionPerformed(evt);
+            }
+        });
+
+        txtmagach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmagachActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Mã gạch");
+
+        jLabel2.setText("Mã nhà cung cấp");
 
         javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
         tab1.setLayout(tab1Layout);
         tab1Layout.setHorizontalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tab1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(27, 27, 27)
-                .addComponent(txttimkien, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(591, 591, 591))
             .addGroup(tab1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(26, 26, 26)
+                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tab1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblgiagach1)
-                            .addComponent(lblmagach1)
-                            .addComponent(lblmanhacungcap1))
-                        .addGap(31, 31, 31)
-                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtmagach1)
-                            .addComponent(txtgiagach1)
-                            .addComponent(txtmanhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(tab1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(btncapnhapgia)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tab1Layout.setVerticalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblmagach1)
-                    .addComponent(txtmagach1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblgiagach1)
-                    .addComponent(txtgiagach1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblmanhacungcap1)
-                    .addComponent(txtmanhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttimkien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jLabel4)
+                    .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncapnhapgia))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         tabs.addTab("Danh Sách", tab1);
@@ -160,7 +164,9 @@ public class BangGiaUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,21 +178,30 @@ public class BangGiaUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txttimkienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimkienActionPerformed
-        timKiem();
-    }//GEN-LAST:event_txttimkienActionPerformed
-
-    private void tblbanggiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblbanggiaMouseClicked
-        if (evt.getClickCount() == 2) {
-            tabs.setSelectedIndex(1);
-            row = tblbanggia.getSelectedRow();
-            setForm(dao.selectByID(tblbanggia.getValueAt(row, 0).toString()));
+    private void tbldanhsachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbldanhsachMouseClicked
+        if (evt.getClickCount() == 1) {
+            tabs.setSelectedIndex(0);
+            row = tbldanhsach.getSelectedRow();
+            setForm(dao.selectByIDGACH(tbldanhsach.getValueAt(row, 0).toString()));
+            updateStatus();
         }
-    }//GEN-LAST:event_tblbanggiaMouseClicked
+    }//GEN-LAST:event_tbldanhsachMouseClicked
 
-    private void txtgiagach1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgiagach1ActionPerformed
+    private void txtgiagachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgiagachActionPerformed
+
+    }//GEN-LAST:event_txtgiagachActionPerformed
+
+    private void btncapnhapgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhapgiaActionPerformed
+         them();
+    }//GEN-LAST:event_btncapnhapgiaActionPerformed
+
+    private void txtmanhacungcapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmanhacungcapActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtgiagach1ActionPerformed
+    }//GEN-LAST:event_txtmanhacungcapActionPerformed
+
+    private void txtmagachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmagachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmagachActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,54 +242,62 @@ public class BangGiaUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncapnhapgia;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblgiagach1;
-    private javax.swing.JLabel lblmagach1;
-    private javax.swing.JLabel lblmanhacungcap1;
     private javax.swing.JPanel tab1;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblbanggia;
-    private javax.swing.JTextField txtgiagach1;
-    private javax.swing.JTextField txtmagach1;
-    private javax.swing.JTextField txtmanhacungcap1;
-    private javax.swing.JTextField txttimkien;
+    private javax.swing.JTable tbldanhsach;
+    private javax.swing.JTextField txtgiagach;
+    private javax.swing.JTextField txtmagach;
+    private javax.swing.JTextField txtmanhacungcap;
     // End of variables declaration//GEN-END:variables
 
-    private void fill() {
-        ArrayList<BangGia> list = dao.selectAll();
+    void fillDS() {
+        model = (DefaultTableModel) tbldanhsach.getModel();
+        ArrayList<BangGia> listbg = dao.selectAllGACH();
         model.setRowCount(0);
-        for (BangGia x : list) {
-            model.addRow(new Object[]{x.getMaGach(), x.getGia(), x.getMaNhaCungCap()});
+        for (BangGia x : listbg) {
+            model.addRow(new Object[]{x.getMaGach(), x.getMaNhaCungCap(), x.getGia()});
         }
     }
 
-    private void timKiem() {
-       String ma = this.txttimkien.getText();
-        if(!(dao.selectByID(ma) == null)){
-            this.txtmagach1.setText(dao.selectByID(ma).getMaGach());
-            this.txtgiagach1.setText(dao.selectByID(ma).getGia()+"");
-            this.txtmanhacungcap1.setText(dao.selectByID(ma).getMaNhaCungCap());
-           
-        }else{
-            MsgBox.alert(this, "Mã chất liệu mượn không tồn tại");
-        }
-    }
-    private void setForm(BangGia bg){
-        txtmagach1.setText(bg.getMaGach());
-        txtgiagach1.setText(bg.getMaGach()+"");
-        txtmanhacungcap1.setText(bg.getMaNhaCungCap());
-    }
-    void prepareGui() {
-        String[] h = {"Mã Gạch", "Giá Gạch", "Mã nhà cung cấp"};
-        model = new DefaultTableModel(h, 0) {
-            @Override
-            public boolean isCellEditable(int i, int i1) {
-                return false;
-            }
-        };
+    private void setForm(BangGia bg) {
+        txtmagach.setText(bg.getMaGach());
+        txtmanhacungcap.setText(bg.getMaNhaCungCap());
+        txtgiagach.setText(bg.getGia() + "");
     }
 
+    void updateStatus() {
+        boolean click = row >= 0;
+        txtmagach.setEnabled(!click);
+        txtmanhacungcap.setEnabled(!click);
+
+    }
+
+    private void them() {
+         BangGia bg = getform();
+        try {
+            dao.them(bg);
+            fillDS();
+            MsgBox.alert(this, "Thêm chất liệu thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm chất liệu thất bại");
+            e.printStackTrace();
+        }
+    }
+    public BangGia getform() {
+        BangGia bg = new BangGia();
+        bg.setMaGach(txtmagach.getText());
+        bg.setMaNhaCungCap(txtmanhacungcap.getText());
+        bg.setGia(Float.parseFloat(txtgiagach.getText()));
+        return bg;
+    }
+
+   
+    
 }
