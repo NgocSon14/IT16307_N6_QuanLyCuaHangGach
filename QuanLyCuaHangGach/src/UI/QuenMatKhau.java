@@ -165,8 +165,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
-        LoadingUI loadUI = new LoadingUI();
-        loadUI.setVisible(true);
+
         String taiKhoan = this.txtTaiKhoan.getText();
         String cccd = this.txtCccd.getText();
         String email = this.txtEmail.getText();
