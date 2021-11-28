@@ -8,6 +8,7 @@ package UI;
 import DAO.DangNhapDAO;
 import Entity.TaiKhoan;
 import Helper.MsgBox;
+import Helper.ShareUser;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,6 +24,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
     public QuenMatKhau() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -163,6 +165,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
+        LoadingUI loadUI = new LoadingUI();
+        loadUI.setVisible(true);
         String taiKhoan = this.txtTaiKhoan.getText();
         String cccd = this.txtCccd.getText();
         String email = this.txtEmail.getText();
@@ -173,6 +177,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
         String ma = this.txtTaiKhoan.getText();
         TaiKhoan tk = daodn.selectByID(ma);
         if (tk.getCCCD().trim().equals(txtCccd.getText()) && tk.getEmail().trim().equals(txtEmail.getText())) {
+
+            ShareUser.user = tk;
             final String username = "vanlongtnhh139@gmail.com";
             final String password = "nhom6113";
 
@@ -206,17 +212,20 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
                 Transport.send(message);
 
-                MsgBox.alert(this, "Đã gửi mã vào email "+ txtEmail.getText());
+                MsgBox.alert(this, "Đã gửi mã vào email: " + txtEmail.getText());
                 String xacNhan = MsgBox.promt(this, "Mời bạn nhập mã xác nhận");
-                if(!xacNhan.trim().equals(code)){
+                if (!xacNhan.trim().equals(code)) {
                     MsgBox.alert(this, "Mã xác nhận đúng");
-                }else{
+                    DoiMatKhauMoi dmk = new DoiMatKhauMoi();
+                    dmk.setVisible(true);
+                    this.dispose();
+                } else {
                     MsgBox.alert(this, "Mã xác nhận sai vui lòng nhập lại mã mới !");
                 }
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             MsgBox.alert(this, "Nhập sai thông tin vui lòng nhập lại !");
         }
     }//GEN-LAST:event_btnDoiMKActionPerformed
