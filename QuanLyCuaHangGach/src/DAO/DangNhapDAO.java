@@ -11,6 +11,7 @@ public class DangNhapDAO extends DAO<TaiKhoan, String>{
     
     String SELECT_ALL_SQL = "select * from DANGNHAP";
     String SELECT_BY_ID_SQL = "select * from DANGNHAP WHERE TAIKHOAN =?";
+    String UPDATE_PASSWORD_SQL = "UPDATE DANGNHAP SET MATKHAU = ? WHERE TAIKHOAN = ?";
     @Override
     public void them(TaiKhoan entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -18,7 +19,11 @@ public class DangNhapDAO extends DAO<TaiKhoan, String>{
 
     @Override
     public void capNhat(TaiKhoan entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            jdbcHelper.update(UPDATE_PASSWORD_SQL, entity.getMatKhau(),entity.getTaiKhoan());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -12,6 +12,7 @@ public class DangNhapUI extends javax.swing.JFrame {
     DangNhapDAO daoDn = new DangNhapDAO();
     public DangNhapUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
    
