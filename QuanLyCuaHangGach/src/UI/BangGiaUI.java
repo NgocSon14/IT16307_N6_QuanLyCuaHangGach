@@ -4,7 +4,10 @@ import DAO.BangGiaDao;
 import DAO.DAO;
 import java.util.ArrayList;
 import Entity.BangGia;
+import Helper.Image;
 import Helper.MsgBox;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 public class BangGiaUI extends javax.swing.JFrame {
@@ -42,6 +45,9 @@ public class BangGiaUI extends javax.swing.JFrame {
         txtmagach = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txttengach = new javax.swing.JTextField();
+        lblanh = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,11 +76,11 @@ public class BangGiaUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã Gạch", "Mã nhà cung cấp", "Giá Gạch"
+                "Mã Gạch", "Mã nhà cung cấp", "Giá Gạch", "Tên Gạch", "Ảnh"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -113,49 +119,80 @@ public class BangGiaUI extends javax.swing.JFrame {
 
         jLabel2.setText("Mã nhà cung cấp");
 
+        jLabel3.setText("Tên gạch");
+
+        txttengach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttengachActionPerformed(evt);
+            }
+        });
+
+        lblanh.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblanh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblanhMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
         tab1.setLayout(tab1Layout);
         tab1Layout.setHorizontalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tab1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblanh, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tab1Layout.createSequentialGroup()
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(26, 26, 26)
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(tab1Layout.createSequentialGroup()
+                                .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3))
+                            .addGroup(tab1Layout.createSequentialGroup()
+                                .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(92, 92, 92)
+                                .addComponent(jLabel4)))
+                        .addGap(33, 33, 33)
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txttengach, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btncapnhapgia))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(591, 591, 591))
-            .addGroup(tab1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(26, 26, 26)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tab1Layout.createSequentialGroup()
-                        .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(btncapnhapgia)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(377, 377, 377))
         );
         tab1Layout.setVerticalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab1Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btncapnhapgia))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tab1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtmagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(txtgiagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtmanhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(txttengach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btncapnhapgia))
+                    .addGroup(tab1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblanh, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("Danh Sách", tab1);
@@ -164,15 +201,11 @@ public class BangGiaUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -202,6 +235,16 @@ public class BangGiaUI extends javax.swing.JFrame {
     private void txtmagachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmagachActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmagachActionPerformed
+
+    private void txttengachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttengachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttengachActionPerformed
+
+    private void lblanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblanhMouseClicked
+       if (evt.getClickCount() == 2) {
+            chonAnh();
+        }   
+    }//GEN-LAST:event_lblanhMouseClicked
 
     /**
      * @param args the command line arguments
@@ -245,16 +288,19 @@ public class BangGiaUI extends javax.swing.JFrame {
     private javax.swing.JButton btncapnhapgia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblanh;
     private javax.swing.JPanel tab1;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbldanhsach;
     private javax.swing.JTextField txtgiagach;
     private javax.swing.JTextField txtmagach;
     private javax.swing.JTextField txtmanhacungcap;
+    private javax.swing.JTextField txttengach;
     // End of variables declaration//GEN-END:variables
 
     void fillDS() {
@@ -262,7 +308,7 @@ public class BangGiaUI extends javax.swing.JFrame {
         ArrayList<BangGia> listbg = dao.selectAllGACH();
         model.setRowCount(0);
         for (BangGia x : listbg) {
-            model.addRow(new Object[]{x.getMaGach(), x.getMaNhaCungCap(), x.getGia()});
+            model.addRow(new Object[]{x.getMaGach(), x.getMaNhaCungCap(), x.getGia(),x.getTengach(),x.getAnh()});
         }
     }
 
@@ -270,12 +316,17 @@ public class BangGiaUI extends javax.swing.JFrame {
         txtmagach.setText(bg.getMaGach());
         txtmanhacungcap.setText(bg.getMaNhaCungCap());
         txtgiagach.setText(bg.getGia() + "");
+        txttengach.setText(bg.getTengach());
+        if (bg.getAnh() != null) {
+            lblanh.setIcon(Image.read(bg.getAnh()));
+        }
     }
 
     void updateStatus() {
         boolean click = row >= 0;
         txtmagach.setEnabled(!click);
         txtmanhacungcap.setEnabled(!click);
+        txttengach.setEnabled(!click);
 
     }
 
@@ -284,9 +335,10 @@ public class BangGiaUI extends javax.swing.JFrame {
         try {
             dao.them(bg);
             fillDS();
-            MsgBox.alert(this, "Thêm chất liệu thành công");
+            
+            MsgBox.alert(this, "Cập nhập giá thành công");
         } catch (Exception e) {
-            MsgBox.alert(this, "Thêm chất liệu thất bại");
+            MsgBox.alert(this, "Cập nhập giá gạch thất bại");
             e.printStackTrace();
         }
     }
@@ -295,9 +347,18 @@ public class BangGiaUI extends javax.swing.JFrame {
         bg.setMaGach(txtmagach.getText());
         bg.setMaNhaCungCap(txtmanhacungcap.getText());
         bg.setGia(Float.parseFloat(txtgiagach.getText()));
+       
         return bg;
     }
 
-   
+   void chonAnh() {
+        JFileChooser jfc = new JFileChooser("logos");
+        if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            Image.save(file);
+            lblanh.setToolTipText(file.getName());
+            lblanh.setIcon(Image.read(file.getName()));
+        }
+    }
     
 }
