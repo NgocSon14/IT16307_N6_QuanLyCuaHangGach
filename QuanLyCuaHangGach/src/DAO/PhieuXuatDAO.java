@@ -12,7 +12,7 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
 
     String SELECT_ALL_SQL = "select * from PHIEUXUAT";
     String SELECT_BY_ID_SQL = "select * from PHIEUXUAT where MAPHIEUXUAT =?";
-    String INSERT_SQL = "insert into PHIEUXUAT(MAPHIEUXUAT,NGAYXUAT,MAKHACHHANG,TRANGTHAI,) values(?,?,?,?)";
+    String INSERT_SQL = "insert into PHIEUXUAT(MAPHIEUXUAT,NGAYXUAT,MAKHACHHANG,TRANGTHAI) values(?,?,?,?)";
     String DELETE_SQL = "delete PHIEUXUAT where MAPHIEUXUAT = ?";
     String UPDATE_SQL = "update PHIEUXUAT set NGAYXUAT = ?, MAKHACHHANG = ?, TRANGTHAI=? where MAPHIEUXUATCHITIET = ?";
 
@@ -53,7 +53,7 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
             while (rs.next()) {
                 PhieuXuat entity = new PhieuXuat();
                 entity.setMaPhieuXuat(rs.getString("MAPHIEUXUAT"));
-                entity.setNgayXuat(rs.getString("NGAYXUAT"));
+                entity.setNgayXuat(rs.getDate("NGAYXUAT"));
                 entity.setMaKhachHang(rs.getString("MAKHACHHANG"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
 

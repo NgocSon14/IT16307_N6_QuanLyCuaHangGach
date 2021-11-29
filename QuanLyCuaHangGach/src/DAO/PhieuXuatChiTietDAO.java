@@ -9,7 +9,7 @@ public class PhieuXuatChiTietDAO extends DAO<PhieuXuatChiTiet, Object> {
 
     String SELECT_ALL_SQL = "select * from PHIEUXUATCHITIET";
     String SELECT_BY_ID_SQL = "select * from PHIEUXUATCHITIET where MAPHIEUXUATCHITIET =?";
-    String INSERT_SQL = "insert into PHIEUXUATCHITIET(MAPHIEUXUATCHITIET,MAPHIEUXUAT,MAGACH,MANHACUNGCAP,SOLUONG,GIABAN) values(?,?,?,?,?,?)";
+    String INSERT_SQL = "insert into PHIEUXUATCHITIET(MAPHIEUXUATCHITIET,MAPHIEUXUAT,MAGACH,MANHACUNGCAP,SOLUONG,GIABAN,TRANGTHAI) values(?,?,?,?,?,?,?)";
     String DELETE_SQL = "delete PHIEUXUATCHITIET where MAPHIEUXUATCHITIET = ?";
     String UPDATE_SQL = "update PHIEUXUATCHITIET set MAPHIEUXUAT = ?, MAGACH = ?, MANHACUNGCAP=?, SOLUONG=?,GIABAN=? where MAPHIEUXUATCHITIET = ?";
 
@@ -49,13 +49,13 @@ public class PhieuXuatChiTietDAO extends DAO<PhieuXuatChiTiet, Object> {
             ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
                 PhieuXuatChiTiet entity = new PhieuXuatChiTiet();
-                entity.setMaPhieuXuatChiTiet(rs.getString("MAPHIEUXUATCHITIET"));
-                entity.setMaPhieuXuat(rs.getString("MAPHIEUXUAT"));
-                entity.setMaGach(rs.getString("MAGACH"));
-                entity.setNhaCungCap(rs.getString("NHACUNGCAP"));
-                entity.setSoLuong(rs.getInt("SOLUONG"));
-                entity.setGiaBan(rs.getFloat("MAPHIEUXUATCHITIET"));
-
+                entity.setMaPhieuXuatChiTiet(rs.getString(1));
+                entity.setMaPhieuXuat(rs.getString(2));
+                entity.setMaGach(rs.getString(3));
+                entity.setNhaCungCap(rs.getString(4));
+                entity.setSoLuong(rs.getInt(5));
+                entity.setGiaBan(rs.getFloat(6));
+                entity.setTrangThai(rs.getBoolean(7));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

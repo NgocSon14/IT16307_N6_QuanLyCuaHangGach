@@ -13,17 +13,19 @@ public class PhieuXuatChiTiet {
     private String maPhieuXuatChiTiet,maPhieuXuat,maGach,nhaCungCap;
     private int soLuong;
     private float giaBan;
+    private boolean trangThai;
 
     public PhieuXuatChiTiet() {
     }
 
-    public PhieuXuatChiTiet(String maPhieuXuatChiTiet, String maPhieuXuat, String maGach, String nhaCungCap, int soLuong, float giaBan) {
+    public PhieuXuatChiTiet(String maPhieuXuatChiTiet, String maPhieuXuat, String maGach, String nhaCungCap, int soLuong, float giaBan, boolean trangThai) {
         this.maPhieuXuatChiTiet = maPhieuXuatChiTiet;
         this.maPhieuXuat = maPhieuXuat;
         this.maGach = maGach;
         this.nhaCungCap = nhaCungCap;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.trangThai = trangThai;
     }
 
     public String getMaPhieuXuatChiTiet() {
@@ -74,10 +76,13 @@ public class PhieuXuatChiTiet {
         this.giaBan = giaBan;
     }
 
-    @Override
-    public String toString() {
-        return "PhieuXuatChiTiet{" + "maPhieuXuatChiTiet=" + maPhieuXuatChiTiet + ", maPhieuXuat=" + maPhieuXuat + ", maGach=" + maGach + ", nhaCungCap=" + nhaCungCap + ", soLuong=" + soLuong + ", giaBan=" + giaBan + '}';
+    public boolean isTrangThai() {
+        return trangThai;
     }
-    
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+   
     
 }

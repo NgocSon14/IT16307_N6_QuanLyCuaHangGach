@@ -47,6 +47,8 @@ public class Main extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -95,6 +97,11 @@ public class Main extends javax.swing.JFrame {
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Anh/iconXuat.jpg"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Anh/iconTk.jpg"))); // NOI18N
@@ -203,6 +210,23 @@ public class Main extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenu6.setText("Thể loại ");
+        jMenu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu6);
+
+        jMenu7.setText("Bảng giá ");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu7);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -249,6 +273,21 @@ public class Main extends javax.swing.JFrame {
         NhaCungCapUI ncc = new NhaCungCapUI();
         ncc.setVisible(true);
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+       PhieuXuatUI pxUI = new PhieuXuatUI();
+       pxUI.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+       TheLoaiUI tlUI = new TheLoaiUI();
+       tlUI.setVisible(true);
+    }//GEN-LAST:event_jMenu6ActionPerformed
+
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+        BangGiaUI bgUI = new BangGiaUI();
+        bgUI.setVisible(true);
+    }//GEN-LAST:event_jMenu7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,6 +346,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
