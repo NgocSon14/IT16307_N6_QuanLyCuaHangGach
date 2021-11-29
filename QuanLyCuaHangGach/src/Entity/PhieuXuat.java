@@ -5,20 +5,22 @@
  */
 package Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Asus
  */
 public class PhieuXuat {
     private String maPhieuXuat;
-    private String ngayXuat;
+    private Date ngayXuat;
     private String maKhachHang;
     private Boolean trangThai;
 
     public PhieuXuat() {
     }
 
-    public PhieuXuat(String maPhieuXuat, String ngayXuat, String maKhachHang, Boolean trangThai) {
+    public PhieuXuat(String maPhieuXuat, Date ngayXuat, String maKhachHang, Boolean trangThai) {
         this.maPhieuXuat = maPhieuXuat;
         this.ngayXuat = ngayXuat;
         this.maKhachHang = maKhachHang;
@@ -33,11 +35,11 @@ public class PhieuXuat {
         this.maPhieuXuat = maPhieuXuat;
     }
 
-    public String getNgayXuat() {
+    public Date getNgayXuat() {
         return ngayXuat;
     }
 
-    public void setNgayXuat(String ngayXuat) {
+    public void setNgayXuat(Date ngayXuat) {
         this.ngayXuat = ngayXuat;
     }
 
