@@ -181,7 +181,7 @@ public class GachUI extends javax.swing.JFrame {
         boolean click = row >= 0;
         btnxoa.setEnabled(click);
         btnchinhsua.setEnabled(click);
-        tftmagach.setEnabled(!click);
+//        tftmagach.setEnabled(!click);
     }
 
     void insert() {
@@ -347,6 +347,7 @@ public class GachUI extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         tftsoluong = new javax.swing.JTextField();
         btnthem = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         tabThungrac = new javax.swing.JPanel();
         btnkhoiphuc = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -391,7 +392,6 @@ public class GachUI extends javax.swing.JFrame {
 
         jLabel6.setText("TÌM KIẾM");
 
-
         tfttimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfttimkiemActionPerformed(evt);
@@ -422,6 +422,13 @@ public class GachUI extends javax.swing.JFrame {
         btnthem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnthemActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -480,8 +487,10 @@ public class GachUI extends javax.swing.JFrame {
                                 .addComponent(btnthem)
                                 .addGap(32, 32, 32)
                                 .addComponent(btnchinhsua)
-                                .addGap(78, 78, 78)
-                                .addComponent(btnxoa))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnxoa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabDSLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -528,7 +537,8 @@ public class GachUI extends javax.swing.JFrame {
                                 .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnchinhsua)
                                     .addComponent(btnxoa)
-                                    .addComponent(btnthem)))
+                                    .addComponent(btnthem)
+                                    .addComponent(jButton1)))
                             .addComponent(lblhinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,6 +659,12 @@ public class GachUI extends javax.swing.JFrame {
         timkiem();        // TODO add your handling code here:
     }//GEN-LAST:event_tfttimkiemActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+tftmagach.setText("");
+tftsoluong.setText("");
+tfttengach.setText("");// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -702,6 +718,7 @@ public class GachUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbkichthuoc;
     private javax.swing.JComboBox<String> cbbncc;
     private javax.swing.JComboBox<String> cbbtheloai;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
