@@ -383,8 +383,8 @@
             <Container class="javax.swing.JPanel" name="tabThungrac">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Th&#xf9;ng r&#xe1;c">
-                    <Property name="tabTitle" type="java.lang.String" value="Th&#xf9;ng r&#xe1;c"/>
+                  <JTabbedPaneConstraints tabName="L&#x1b0;u tr&#x1eef;">
+                    <Property name="tabTitle" type="java.lang.String" value="L&#x1b0;u tr&#x1eef;"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
