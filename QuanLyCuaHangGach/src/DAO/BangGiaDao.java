@@ -10,14 +10,17 @@ import java.util.logging.Logger;
 
 public class BangGiaDao extends DAO<BangGia, String> {
 
-    String Select_All_GACH = "SELECT Gach.MAGACH, Gach.MANHACUNGCAP,BANGGIA.GIAGACH\n"
-            + "  FROM Gach\n"
-            + "  LEFT OUTER JOIN BangGia\n"
-            + "  ON Gach.MAGACH = BANGGIA.MAGACH;";
-    String SELECT_BY_ID_GACH = "SELECT Gach.MAGACH, Gach.MANHACUNGCAP,BANGGIA.GIAGACH\n"
-            + "FROM Gach\n"
-            + "LEFT OUTER JOIN BangGia\n"
-            + " ON Gach.MAGACH = BANGGIA.MAGACH where GACH.MAGACH =?";
+
+    String Select_All_GACH ="SELECT Gach.MAGACH, Gach.MANHACUNGCAP,BANGGIA.GIAGACH,Gach.TENGACH,ANH\n" +
+"            FROM Gach\n" +
+"            LEFT OUTER JOIN BangGia\n" +
+"             ON Gach.MAGACH = BANGGIA.MAGACH ";
+           
+    String SELECT_BY_ID_GACH = "SELECT Gach.MAGACH, Gach.MANHACUNGCAP,BANGGIA.GIAGACH,Gach.TENGACH,Gach.Anh\n" +
+"            FROM Gach\n" +
+"            LEFT OUTER JOIN BangGia\n" +
+"             ON Gach.MAGACH = BANGGIA.MAGACH where GACH.MAGACH =?";
+    
 
     String INSERT_BANGGIA = "insert into BangGia(MAGACH,MANHACUNGCAP,GIAGACH) VALUES(?,?,?)";
     String SELECT_GIA = "SELECT * FROM BANGGIA WHERE MAGACH = ?";
@@ -61,7 +64,8 @@ public class BangGiaDao extends DAO<BangGia, String> {
             ArrayList<BangGia> listBG = new ArrayList<>();
             ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
-                listBG.add(new BangGia(rs.getString(1), rs.getString(3), rs.getFloat(2)));
+
+                listBG.add(new BangGia(rs.getString(1), rs.getString(2), rs.getFloat(3),rs.getString(4),rs.getString(5)));
             }
             rs.getStatement().getConnection().close();
             return listBG;

@@ -12,14 +12,18 @@ package Entity;
 public class BangGia {
     private String  maGach,maNhaCungCap;
     private float gia;
+    private String tengach;
+    private String anh;
 
     public BangGia() {
     }
 
-    public BangGia(String maGach, String maNhaCungCap, float gia) {
+    public BangGia(String maGach, String maNhaCungCap, float gia, String tengach, String anh) {
         this.maGach = maGach;
         this.maNhaCungCap = maNhaCungCap;
         this.gia = gia;
+        this.tengach = tengach;
+        this.anh = anh;
     }
 
     public String getMaGach() {
@@ -46,14 +50,24 @@ public class BangGia {
         this.gia = gia;
     }
 
-    @Override
-    public String toString() {
-        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + '}';
+    public String getTengach() {
+        return tengach;
     }
 
-   
+    public void setTengach(String tengach) {
+        this.tengach = tengach;
+    }
 
-   
-    
-    
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
+    @Override
+    public String toString() {
+        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + ", tengach=" + tengach + ", anh=" + anh + '}';
+    }
 }
