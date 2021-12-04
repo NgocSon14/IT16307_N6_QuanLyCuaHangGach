@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 public class BangGiaDao extends DAO<BangGia, String> {
 
+
     String Select_All_GACH ="SELECT Gach.MAGACH, Gach.MANHACUNGCAP,BANGGIA.GIAGACH,Gach.TENGACH,ANH\n" +
 "            FROM Gach\n" +
 "            LEFT OUTER JOIN BangGia\n" +
@@ -20,11 +21,21 @@ public class BangGiaDao extends DAO<BangGia, String> {
 "            LEFT OUTER JOIN BangGia\n" +
 "             ON Gach.MAGACH = BANGGIA.MAGACH where GACH.MAGACH =?";
     
+
     String INSERT_BANGGIA = "insert into BangGia(MAGACH,MANHACUNGCAP,GIAGACH) VALUES(?,?,?)";
+    String SELECT_GIA = "SELECT * FROM BANGGIA WHERE MAGACH = ?";
+    
+     public BangGia selectByID_Gia(String key) {
+        ArrayList<BangGia> listBangGia = selectBySql(SELECT_GIA, key);
+        if (listBangGia.isEmpty()) {
+            return null;
+        }
+        return listBangGia.get(0);
+    }
     
     @Override
     public void them(BangGia entity) {
-        jdbcHelper.update(INSERT_BANGGIA, entity.getMaGach(),entity.getMaNhaCungCap(),entity.getGia());
+        jdbcHelper.update(INSERT_BANGGIA, entity.getMaGach(), entity.getMaNhaCungCap(), entity.getGia());
     }
 
     @Override
@@ -53,6 +64,7 @@ public class BangGiaDao extends DAO<BangGia, String> {
             ArrayList<BangGia> listBG = new ArrayList<>();
             ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
+
                 listBG.add(new BangGia(rs.getString(1), rs.getString(2), rs.getFloat(3),rs.getString(4),rs.getString(5)));
             }
             rs.getStatement().getConnection().close();

@@ -12,15 +12,27 @@ public class PhieuXuatChiTietDAO extends DAO<PhieuXuatChiTiet, Object> {
     String INSERT_SQL = "insert into PHIEUXUATCHITIET(MAPHIEUXUATCHITIET,MAPHIEUXUAT,MAGACH,MANHACUNGCAP,SOLUONG,GIABAN,TRANGTHAI) values(?,?,?,?,?,?,?)";
     String DELETE_SQL = "delete PHIEUXUATCHITIET where MAPHIEUXUATCHITIET = ?";
     String UPDATE_SQL = "update PHIEUXUATCHITIET set MAPHIEUXUAT = ?, MAGACH = ?, MANHACUNGCAP=?, SOLUONG=?,GIABAN=? where MAPHIEUXUATCHITIET = ?";
+    String SELECT_BY_ID_MAPHIEUNHAP = "select * from PHIEUXUATCHITIET where MAPHIEUXUAT=?";
+    String UPDATE_TRANGTHAI = "update PHIEUXUATCHITIET set TRANGTHAI = 0 WHERE MAPHIEUXUATCHITIET = ?";
+    public void capNhatTrangThai(String key) {
+        jdbcHelper.update(UPDATE_TRANGTHAI, key);
+    }
+    public PhieuXuatChiTiet fillTable(Object key) {
+        ArrayList<PhieuXuatChiTiet> list = selectBySql(SELECT_BY_ID_MAPHIEUNHAP, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
     @Override
     public void them(PhieuXuatChiTiet entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuXuatChiTiet(),entity.getMaPhieuXuat(),entity.getMaGach(),entity.getNhaCungCap(),entity.getSoLuong(),entity.getGiaBan());
+        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuXuatChiTiet(), entity.getMaPhieuXuat(), entity.getMaGach(), entity.getNhaCungCap(), entity.getSoLuong(), entity.getGiaBan(),entity.isTrangThai() == false);
     }
 
     @Override
     public void capNhat(PhieuXuatChiTiet entity) {
-        jdbcHelper.update(UPDATE_SQL, entity.getMaPhieuXuat(),entity.getMaGach(),entity.getNhaCungCap(),entity.getSoLuong(),entity.getGiaBan());
+        jdbcHelper.update(UPDATE_SQL, entity.getMaPhieuXuat(), entity.getMaGach(), entity.getNhaCungCap(), entity.getSoLuong(), entity.getGiaBan(),entity.getMaPhieuXuatChiTiet());
     }
 
     @Override
@@ -36,10 +48,10 @@ public class PhieuXuatChiTietDAO extends DAO<PhieuXuatChiTiet, Object> {
     @Override
     public PhieuXuatChiTiet selectByID(Object key) {
         ArrayList<PhieuXuatChiTiet> list = selectBySql(SELECT_BY_ID_SQL, key);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
-        return  list.get(0);
+        return list.get(0);
     }
 
     @Override
