@@ -18,12 +18,21 @@ public class BangGiaDao extends DAO<BangGia, String> {
             + "FROM Gach\n"
             + "LEFT OUTER JOIN BangGia\n"
             + " ON Gach.MAGACH = BANGGIA.MAGACH where GACH.MAGACH =?";
-    
+
     String INSERT_BANGGIA = "insert into BangGia(MAGACH,MANHACUNGCAP,GIAGACH) VALUES(?,?,?)";
+    String SELECT_GIA = "SELECT * FROM BANGGIA WHERE MAGACH = ?";
+    
+     public BangGia selectByID_Gia(String key) {
+        ArrayList<BangGia> listBangGia = selectBySql(SELECT_GIA, key);
+        if (listBangGia.isEmpty()) {
+            return null;
+        }
+        return listBangGia.get(0);
+    }
     
     @Override
     public void them(BangGia entity) {
-        jdbcHelper.update(INSERT_BANGGIA, entity.getMaGach(),entity.getMaNhaCungCap(),entity.getGia());
+        jdbcHelper.update(INSERT_BANGGIA, entity.getMaGach(), entity.getMaNhaCungCap(), entity.getGia());
     }
 
     @Override
@@ -52,7 +61,7 @@ public class BangGiaDao extends DAO<BangGia, String> {
             ArrayList<BangGia> listBG = new ArrayList<>();
             ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
-                listBG.add(new BangGia(rs.getString(1), rs.getString(2), rs.getFloat(3)));
+                listBG.add(new BangGia(rs.getString(1), rs.getString(3), rs.getFloat(2)));
             }
             rs.getStatement().getConnection().close();
             return listBG;
@@ -76,4 +85,3 @@ public class BangGiaDao extends DAO<BangGia, String> {
         }
     }
 }
-

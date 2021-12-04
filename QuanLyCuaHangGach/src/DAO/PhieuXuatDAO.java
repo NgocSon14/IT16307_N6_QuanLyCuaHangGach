@@ -1,4 +1,3 @@
-
 package DAO;
 
 import Entity.PhieuXuat;
@@ -7,23 +6,27 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
 
     String SELECT_ALL_SQL = "select * from PHIEUXUAT";
     String SELECT_BY_ID_SQL = "select * from PHIEUXUAT where MAPHIEUXUAT =?";
     String INSERT_SQL = "insert into PHIEUXUAT(MAPHIEUXUAT,NGAYXUAT,MAKHACHHANG,TRANGTHAI) values(?,?,?,?)";
     String DELETE_SQL = "delete PHIEUXUAT where MAPHIEUXUAT = ?";
-    String UPDATE_SQL = "update PHIEUXUAT set NGAYXUAT = ?, MAKHACHHANG = ?, TRANGTHAI=? where MAPHIEUXUATCHITIET = ?";
+    String UPDATE_SQL = "update PHIEUXUAT set NGAYXUAT = ?, MAKHACHHANG = ?, TRANGTHAI=? where MAPHIEUXUAT = ?";
+    String UPDATE_TRANHTHAI_SQL = "update PHIEUXUAT set TRANGTHAI=0 where MAPHIEUXUAT=?";
 
+    
+    public void capNhatTrangThai(String key) {
+        jdbcHelper.update(UPDATE_TRANHTHAI_SQL,key);
+    }
     @Override
     public void them(PhieuXuat entity) {
- jdbcHelper.update(INSERT_SQL, entity.getMaPhieuXuat(),entity.getNgayXuat(),entity.getMaKhachHang(),entity.getTrangThai());
+        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuXuat(), entity.getNgayXuat(), entity.getMaKhachHang(), entity.getTrangThai() == true);
     }
 
     @Override
     public void capNhat(PhieuXuat entity) {
-        jdbcHelper.update(UPDATE_SQL, entity.getNgayXuat(),entity.getMaKhachHang(),entity.getTrangThai());
+        jdbcHelper.update(UPDATE_SQL, entity.getNgayXuat(), entity.getMaKhachHang(), entity.getTrangThai(), entity.getMaPhieuXuat());
     }
 
     @Override
@@ -33,12 +36,12 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
 
     @Override
     public ArrayList<PhieuXuat> selectAll() {
-         return this.selectBySql(SELECT_ALL_SQL);
+        return this.selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     public PhieuXuat selectByID(String key) {
-         ArrayList<PhieuXuat> list = this.selectBySql(SELECT_BY_ID_SQL, key);
+        ArrayList<PhieuXuat> list = this.selectBySql(SELECT_BY_ID_SQL, key);
         if (list.isEmpty()) {
             return null;
         }
@@ -65,12 +68,13 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
             throw new RuntimeException(e);
         }
     }
-        public List<Integer> selectYear(){
+
+    public List<Integer> selectYear() {
         String sql = "SELECT DISTINCT YEAR(NgayKG) FROM dbo.PHIEUXUAT ORDER BY YEAR(NgayKG) DESC";
         List<Integer> list = new ArrayList<>();
         try {
-            ResultSet rs= jdbcHelper.query(sql);
-            while (rs.next()) {                
+            ResultSet rs = jdbcHelper.query(sql);
+            while (rs.next()) {
                 list.add(rs.getInt(1));
             }
             rs.getStatement().getConnection().close();
