@@ -19,6 +19,12 @@ public class GachDAO extends DAO<Gach, String>{
     String DELETE_SQL = "update GACH set TRANGTHAI=0 where MAGACH=?";
     String SELECT_ALL_SQL = "SELECT * FROM GACH";
     String SELECT_BY_ID_SQL = "SELECT * FROM GACH WHERE MAGACH = ?";
+    String UPDATE_SO_LUONG = "UPDATE GACH SET SOLUONG=? WHERE MAGACH = ?";
+    
+     public void capNhatSoLuong(Gach entity) {
+        jdbcHelper.update(UPDATE_SQL,entity.getSoLuong(),entity.getMaGach());
+    }
+     
     @Override
     public void them(Gach entity) {
         jdbcHelper.update(INSERT_SQL, entity.getMaGach(),entity.getTenGach(),entity.getMaDv(),entity.getSoLuong(),entity.getMaChatLieu(),entity.getMaTheLoai(),
