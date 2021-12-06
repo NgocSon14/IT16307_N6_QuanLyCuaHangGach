@@ -13,16 +13,18 @@ public class BangGia {
     private String  maGach,maNhaCungCap;
     private float gia;
     private String tengach;
+    private float gianhap;
     private String anh;
 
     public BangGia() {
     }
 
-    public BangGia(String maGach, String maNhaCungCap, float gia, String tengach, String anh) {
+    public BangGia(String maGach, String maNhaCungCap, float gia, String tengach, float gianhap, String anh) {
         this.maGach = maGach;
         this.maNhaCungCap = maNhaCungCap;
         this.gia = gia;
         this.tengach = tengach;
+        this.gianhap = gianhap;
         this.anh = anh;
     }
 
@@ -58,6 +60,14 @@ public class BangGia {
         this.tengach = tengach;
     }
 
+    public float getGianhap() {
+        return gianhap;
+    }
+
+    public void setGianhap(float gianhap) {
+        this.gianhap = gianhap;
+    }
+
     public String getAnh() {
         return anh;
     }
@@ -68,6 +78,8 @@ public class BangGia {
 
     @Override
     public String toString() {
-        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + ", tengach=" + tengach + ", anh=" + anh + '}';
+        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + ", tengach=" + tengach + ", gianhap=" + gianhap + ", anh=" + anh + '}';
     }
+
+    
 }
