@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class KichThuocDAO extends DAO<KichThuoc, String>{
     String SELECT_ALL_SQL = "select * from DONVITINH";
     String SELECT_BY_ID_SQL = "select * from DONVITINH where MADONVI =?";
-    String INSERT_SQL = "insert into DONVITINH(MADONVI,TENDONVI) values(?,?)";
+    String INSERT_SQL = "insert into DONVITINH(TENDONVI) values(?)";
     String DELETE_SQL = "delete DONVITINH where MADONVI = ?";
     String UPDATE_SQL = "update DONVITINH set TENDONVI = ? where MADONVI = ?";
 
     @Override
     public void them(KichThuoc entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaDonVi(),entity.getTenDonVi());
+        jdbcHelper.update(INSERT_SQL, entity.getTenDonVi());
     }
 
     @Override

@@ -10,7 +10,7 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
 
     String SELECT_ALL_SQL = "select * from PHIEUXUAT";
     String SELECT_BY_ID_SQL = "select * from PHIEUXUAT where MAPHIEUXUAT =?";
-    String INSERT_SQL = "insert into PHIEUXUAT(MAPHIEUXUAT,NGAYXUAT,MAKHACHHANG,TRANGTHAI) values(?,?,?,?)";
+    String INSERT_SQL = "insert into PHIEUXUAT(NGAYXUAT,MAKHACHHANG,TRANGTHAI) values(?,?,?)";
     String DELETE_SQL = "delete PHIEUXUAT where MAPHIEUXUAT = ?";
     String UPDATE_SQL = "update PHIEUXUAT set NGAYXUAT = ?, MAKHACHHANG = ?, TRANGTHAI=? where MAPHIEUXUAT = ?";
     String UPDATE_TRANHTHAI_SQL = "update PHIEUXUAT set TRANGTHAI=0 where MAPHIEUXUAT=?";
@@ -21,7 +21,7 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
     }
     @Override
     public void them(PhieuXuat entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuXuat(), entity.getNgayXuat(), entity.getMaKhachHang(), entity.getTrangThai() == true);
+        jdbcHelper.update(INSERT_SQL, entity.getNgayXuat(), entity.getMaKhachHang(), entity.getTrangThai() == true);
     }
 
     @Override

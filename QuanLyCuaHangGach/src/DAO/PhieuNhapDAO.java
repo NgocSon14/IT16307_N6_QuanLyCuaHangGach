@@ -18,14 +18,14 @@ public class PhieuNhapDAO extends DAO<PhieuNhap, String> {
 
     String SELECT_ALL_SQL = "select * from PHIEUNHAP";
     String SELECT_BY_ID_SQL = "select * from PHIEUNHAP where MAPHIEUNHAP =?";
-    String INSERT_SQL = "insert into PHIEUNHAP(MAPHIEUNHAP,NGAYNHAP,MANHACUNGCAP,TRANGTHAI) values(?,?,?,?)";
+    String INSERT_SQL = "insert into PHIEUNHAP(NGAYNHAP,MANHACUNGCAP,TRANGTHAI) values(?,?,?)";
     String DELETE_SQL = "update PHIEUNHAP set TRANGTHAI=0 where MAPHIEUNHAP=?";
     String UPDATE_SQL = "update PHIEUNHAP set NGAYNHAP = ?, MANHACUNGCAP = ?, TRANGTHAI=? where MAPHIEUNHAP = ?";
 
     @Override
     public void them(PhieuNhap entity) {
         try {
-            jdbcHelper.update(INSERT_SQL, entity.getMaPhieuNhap(), entity.getNgayNhap(), entity.getMaNhaCungCap(), entity.isTrangThai() == true);
+            jdbcHelper.update(INSERT_SQL,  entity.getNgayNhap(), entity.getMaNhaCungCap(), entity.isTrangThai() == true);
         } catch (Exception e) {
             e.printStackTrace();
         }
