@@ -12,20 +12,24 @@ package Entity;
 public class BangGia {
     private String  maGach,maNhaCungCap;
     private float gia;
-    private String tengach;
-    private float gianhap;
-    private String anh;
+    private String tenGach,maDonVI;
+    private int soLuong;
+    private String maChatLieu,maTheLoai,Anh;
+   
 
     public BangGia() {
     }
 
-    public BangGia(String maGach, String maNhaCungCap, float gia, String tengach, float gianhap, String anh) {
+    public BangGia(String maGach, String maNhaCungCap, float gia, String tenGach, String maDonVI, int soLuong, String maChatLieu, String maTheLoai, String Anh) {
         this.maGach = maGach;
         this.maNhaCungCap = maNhaCungCap;
         this.gia = gia;
-        this.tengach = tengach;
-        this.gianhap = gianhap;
-        this.anh = anh;
+        this.tenGach = tenGach;
+        this.maDonVI = maDonVI;
+        this.soLuong = soLuong;
+        this.maChatLieu = maChatLieu;
+        this.maTheLoai = maTheLoai;
+        this.Anh = Anh;
     }
 
     public String getMaGach() {
@@ -52,34 +56,56 @@ public class BangGia {
         this.gia = gia;
     }
 
-    public String getTengach() {
-        return tengach;
+    public String getTenGach() {
+        return tenGach;
     }
 
-    public void setTengach(String tengach) {
-        this.tengach = tengach;
+    public void setTenGach(String tenGach) {
+        this.tenGach = tenGach;
     }
 
-    public float getGianhap() {
-        return gianhap;
+    public String getMaDonVI() {
+        return maDonVI;
     }
 
-    public void setGianhap(float gianhap) {
-        this.gianhap = gianhap;
+    public void setMaDonVI(String maDonVI) {
+        this.maDonVI = maDonVI;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public String getMaChatLieu() {
+        return maChatLieu;
+    }
+
+    public void setMaChatLieu(String maChatLieu) {
+        this.maChatLieu = maChatLieu;
+    }
+
+    public String getMaTheLoai() {
+        return maTheLoai;
+    }
+
+    public void setMaTheLoai(String maTheLoai) {
+        this.maTheLoai = maTheLoai;
     }
 
     public String getAnh() {
-        return anh;
+        return Anh;
     }
 
-    public void setAnh(String anh) {
-        this.anh = anh;
+    public void setAnh(String Anh) {
+        this.Anh = Anh;
     }
 
-    @Override
-    public String toString() {
-        return "BangGia{" + "maGach=" + maGach + ", maNhaCungCap=" + maNhaCungCap + ", gia=" + gia + ", tengach=" + tengach + ", gianhap=" + gianhap + ", anh=" + anh + '}';
-    }
-
+  
+   
+   
     
 }
