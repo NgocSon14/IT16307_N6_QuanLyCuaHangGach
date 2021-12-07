@@ -20,11 +20,11 @@ public class KhachHangDao extends DAO<KhachHang, String>{
     String SQL_Delete="update KHACHHANG set TRANGTHAI=0 where MAKHACHHANG=?";
     String SQL_SelectAll="select*from KHACHHANG";
     String SQL_SelectID="select*from KHACHHANG where MAKHACHHANG=?";
-    String SQL_INSERT = "INSERT INTO KHACHHANG(MAKHACHHANG,TENKHACHHANG,DIACHI,SODIENTHOAI,EMAIL,THONGTINKHAC,TRANGTHAI) VALUES(?,?,?,?,?,?,?)";
+    String SQL_INSERT = "INSERT INTO KHACHHANG(TENKHACHHANG,DIACHI,SODIENTHOAI,EMAIL,THONGTINKHAC,TRANGTHAI) VALUES(?,?,?,?,?,?)";
     @Override
     public void them(KhachHang entity) {
         try {
-            jdbcHelper.update(SQL_INSERT,entity.getMaKhachHang(),entity.getTenKhachHang(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai());
+            jdbcHelper.update(SQL_INSERT, entity.getTenKhachHang(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai());
         } catch (Exception e) {
             e.printStackTrace();
         }

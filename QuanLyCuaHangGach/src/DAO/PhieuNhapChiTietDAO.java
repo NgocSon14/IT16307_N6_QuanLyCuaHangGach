@@ -9,7 +9,7 @@ public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
 
     String SELECT_ALL_SQL = "select * from PHIEUNHAPCHITIET";
     String SELECT_BY_ID_SQL = "select * from PHIEUNHAPCHITIET where MAPHIEUNHAPCHITIET =?";
-    String INSERT_SQL = "insert into PHIEUNHAPCHITIET(MAPHIEUNHAPCHITIET,MAPHIEUNHAP,MAGACH,SOLUONG,GIANHAP,GIABAN,TRANGTHAI) values(?,?,?,?,?,?,?)";
+    String INSERT_SQL = "insert into PHIEUNHAPCHITIET(MAPHIEUNHAP,MAGACH,SOLUONG,GIANHAP,GIABAN,TRANGTHAI) values(?,?,?,?,?,?)";
     String DELETE_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAPCHITIET = ?";
     String DELETE_PNCT_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAPCHITIET = ?";
     String UPDATE_SQL = "update PHIEUNHAPCHITIET set MAPHIEUNHAP = ?, MAGACH = ?, SOLUONG=?, GIANHAP=?,GIABAN=? where MAPHIEUNHAPCHITIET = ?";
@@ -22,7 +22,7 @@ public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
     }
     @Override
     public void them(PhieuNhapChiTiet entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuNhapChiTiet(),entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan(),entity.isTrangThai() == false);
+        jdbcHelper.update(INSERT_SQL, entity.getMaPhieuNhap(),entity.getMaGach(),entity.getSoluong(),entity.getGiaNhap(),entity.getGiaBan(),entity.isTrangThai() == false);
     }
 
     @Override

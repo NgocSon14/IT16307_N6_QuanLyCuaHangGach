@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class ChatLieuDao extends DAO<ChatLieu, String> {
 
-    String SQL_Insert = "insert into CHATLIEU(MACHATLIEU,TENCHATLIEU) values(?,?) ";
+    String SQL_Insert = "insert into CHATLIEU(TENCHATLIEU) values(?) ";
     String SQL_Update = "update CHATLIEU set TENCHATLIEU=? WHERE MACHATLIEU=?";
     String SQL_Delete = "delete from CHATLIEU WHERE MACHATLIEU =?";
     String SQL_SelectAll = "select*from CHATLIEU";
@@ -15,7 +15,7 @@ public class ChatLieuDao extends DAO<ChatLieu, String> {
 
     @Override
     public void them(ChatLieu entity) {
-        jdbcHelper.update(SQL_Insert, entity.getMaChatLieu(), entity.getTenChatLieu());
+        jdbcHelper.update(SQL_Insert,  entity.getTenChatLieu());
     }
 
     @Override
@@ -41,7 +41,9 @@ public class ChatLieuDao extends DAO<ChatLieu, String> {
         }
         return listChatLieu.get(0);
     }
-
+    
+    
+    
     @Override
     protected ArrayList<ChatLieu> selectBySql(String sql, Object... args) {
         ArrayList<ChatLieu> ListChatLieu = new ArrayList<>();

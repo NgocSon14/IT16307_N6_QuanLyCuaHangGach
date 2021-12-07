@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  * @author Asus
  */
 public class GachDAO extends DAO<Gach, String>{
-    String INSERT_SQL = "INSERT INTO GACH(MAGACH,TENGACH,MADONVI,SOLUONG,MACHATLIEU,MATHELOAI,MANHACUNGCAP,ANH,TRANGTHAI) VALUES (?,?,?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO GACH(TENGACH,MADONVI,SOLUONG,MACHATLIEU,MATHELOAI,MANHACUNGCAP,ANH,TRANGTHAI) VALUES (?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE GACH SET TENGACH = ?,MADONVI=?,SOLUONG=?,MACHATLIEU=?,MATHELOAI=?,MANHACUNGCAP=?,ANH=?,TRANGTHAI=? WHERE MAGACH = ?";
     String DELETE_SQL = "update GACH set TRANGTHAI=0 where MAGACH=?";
     String SELECT_ALL_SQL = "SELECT * FROM GACH";
@@ -27,7 +27,7 @@ public class GachDAO extends DAO<Gach, String>{
      
     @Override
     public void them(Gach entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaGach(),entity.getTenGach(),entity.getMaDv(),entity.getSoLuong(),entity.getMaChatLieu(),entity.getMaTheLoai(),
+        jdbcHelper.update(INSERT_SQL, entity.getTenGach(),entity.getMaDv(),entity.getSoLuong(),entity.getMaChatLieu(),entity.getMaTheLoai(),
                 entity.getMaNhaCungCap(),entity.getAnh(),true);
     }
 

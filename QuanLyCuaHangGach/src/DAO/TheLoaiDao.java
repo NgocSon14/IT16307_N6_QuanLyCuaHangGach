@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class TheLoaiDao extends DAO<TheLoai, String>{
-     String SQL_Insert="insert into THELOAI values(?,?) ";
+     String SQL_Insert="insert into THELOAI(TENTHELOAI) values(?) ";
     String SQL_Update="update THELOAI set MATHELOAI=?,TENTHELOAI=?";
     String SQL_Delete="delete from THELOAI WHERE MATHELOAI=?";
     String SQL_SelectAll="select*from THELOAI";
@@ -22,7 +22,7 @@ public class TheLoaiDao extends DAO<TheLoai, String>{
 
     @Override
     public void them(TheLoai entity) {
-        jdbcHelper.update(SQL_Insert, entity.getMaTheLoai(),entity.getTenTheLoai()); 
+        jdbcHelper.update(SQL_Insert,entity.getTenTheLoai()); 
     }
     @Override
     public void capNhat(TheLoai entity) {
