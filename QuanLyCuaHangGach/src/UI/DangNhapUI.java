@@ -3,6 +3,7 @@ package UI;
 
 import DAO.DangNhapDAO;
 import Entity.TaiKhoan;
+import Helper.ShareUser;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -196,6 +197,7 @@ public class DangNhapUI extends javax.swing.JFrame {
                 txtMatKhau.setBackground(Color.red);
                 return;
             }else{
+                ShareUser.user = tk;
                 txtMatKhau.setBackground(Color.WHITE);
                 txtTaiKhoan.setBackground(Color.WHITE);
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công");

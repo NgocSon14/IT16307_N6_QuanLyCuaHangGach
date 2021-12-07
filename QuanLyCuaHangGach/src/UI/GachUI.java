@@ -20,6 +20,7 @@ import Entity.KichThuoc;
 import Entity.NhaCungCap;
 import Helper.Image;
 import Helper.MsgBox;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -48,7 +49,7 @@ public class GachUI extends javax.swing.JFrame {
         showchatlieu();
         showdonvi();
         showtheloai();
-
+        this.tftmagach.setEnabled(false);
     }
 
     void init() {
@@ -147,6 +148,7 @@ public class GachUI extends javax.swing.JFrame {
         cbbtheloai.setSelectedItem(gach.getMaTheLoai());
         if (gach.getAnh() != null) {
             lblhinhanh.setIcon(Image.read(gach.getAnh()));
+            lblhinhanh.setToolTipText(gach.getAnh());
         }
 
     }
@@ -240,7 +242,7 @@ public class GachUI extends javax.swing.JFrame {
     }
 
     void chonAnh() {
-        JFileChooser jfc = new JFileChooser("logos");
+        JFileChooser jfc = new JFileChooser("C:\\Users\\Asus\\OneDrive\\Desktop\\IT16307_N6_QuanLyCuaHangGach\\QuanLyCuaHangGach\\src\\ImageGach");
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();
             Image.save(file);
@@ -248,7 +250,6 @@ public class GachUI extends javax.swing.JFrame {
             lblhinhanh.setIcon(Image.read(file.getName()));
         }
     }
-
 
     void timkiem() {
         ArrayList<Gach> list = daogach.selectAll();
@@ -268,49 +269,42 @@ public class GachUI extends javax.swing.JFrame {
 
     boolean check() {
         try {
-            
-            
-            if (tftmagach.getText().equals("")) {
-                MsgBox.alert(this, "Không để trống mã gạch");
-                tftmagach.requestFocus();
+
+            if (tfttengach.getText().equals("")) {
+                MsgBox.alert(this, "Không để trống tên gạch");
+                tfttengach.requestFocus();
                 return false;
             } else {
-                if (tfttengach.getText().equals("")) {
-                    MsgBox.alert(this, "Không để trống tên gạch");
-                    tfttengach.requestFocus();
-                    return false;
+                if (tftsoluong.getText().equals("")) {
+                    MsgBox.alert(this, "Không để trống số lượng");
                 } else {
-                    if (tftsoluong.getText().equals("")) {
-                        MsgBox.alert(this, "Không để trống số lượng");
-                    }
-                    else{
-                        try {
-                            int t1=Integer.parseInt(tftsoluong.getText());
-                            if(t1<=0){
+                    try {
+                        int t1 = Integer.parseInt(tftsoluong.getText());
+                        if (t1 <= 0) {
                             MsgBox.alert(this, "Số lượng phải là số nguyên dương");
                             tftsoluong.requestFocus();
                             return false;
-                            }
-                        } catch (Exception e) {
-                            MsgBox.alert(this, "Số lượng phải là số");
-                            tftsoluong.requestFocus();
-                            return false;
                         }
+                    } catch (Exception e) {
+                        MsgBox.alert(this, "Số lượng phải là số");
+                        tftsoluong.requestFocus();
+                        return false;
                     }
                 }
             }
+
         } catch (Exception e) {
         }
         return true;
     }
-    boolean checktrung(){
-      Gach gach=daogach.selectByID(tftmagach.getText());
-      if(gach!=null){
-      MsgBox.alert(this, "Mã gạch đã tồn tại");
-      return false;
-      }
-      return true;
-    }
+//    boolean checktrung(){
+//      Gach gach=daogach.selectByID(tftmagach.getText());
+//      if(gach!=null){
+//      MsgBox.alert(this, "Mã gạch đã tồn tại");
+//      return false;
+//      }
+//      return true;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -348,6 +342,10 @@ public class GachUI extends javax.swing.JFrame {
         tftsoluong = new javax.swing.JTextField();
         btnthem = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtTenChatLieu = new javax.swing.JLabel();
+        txtTenNhaCungCap = new javax.swing.JLabel();
+        txtTenTheLoai = new javax.swing.JLabel();
+        txtTenDonVi = new javax.swing.JLabel();
         tabThungrac = new javax.swing.JPanel();
         btnkhoiphuc = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -372,9 +370,38 @@ public class GachUI extends javax.swing.JFrame {
 
         jLabel9.setText("Thể loại:");
 
+        cbbchatlieu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbchatlieuItemStateChanged(evt);
+            }
+        });
+        cbbchatlieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbchatlieuMouseClicked(evt);
+            }
+        });
+
+        cbbtheloai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbtheloaiItemStateChanged(evt);
+            }
+        });
+
         jLabel10.setText("Đơn vị");
 
+        cbbkichthuoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbkichthuocItemStateChanged(evt);
+            }
+        });
+
         jLabel8.setText("Nhà cung cấp:");
+
+        cbbncc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbnccItemStateChanged(evt);
+            }
+        });
 
         btnchinhsua.setText("Chỉnh sửa");
         btnchinhsua.addActionListener(new java.awt.event.ActionListener() {
@@ -400,10 +427,7 @@ public class GachUI extends javax.swing.JFrame {
 
         tblDS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -432,6 +456,18 @@ public class GachUI extends javax.swing.JFrame {
             }
         });
 
+        txtTenChatLieu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTenChatLieu.setText("jLabel1");
+
+        txtTenNhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTenNhaCungCap.setText("jLabel1");
+
+        txtTenTheLoai.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTenTheLoai.setText("jLabel1");
+
+        txtTenDonVi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTenDonVi.setText("jLabel1");
+
         javax.swing.GroupLayout tabDSLayout = new javax.swing.GroupLayout(tabDS);
         tabDS.setLayout(tabDSLayout);
         tabDSLayout.setHorizontalGroup(
@@ -449,6 +485,21 @@ public class GachUI extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(lblhinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabDSLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(295, 295, 295))
+                            .addGroup(tabDSLayout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(btnthem)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnchinhsua)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnxoa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
                             .addGroup(tabDSLayout.createSequentialGroup()
                                 .addGap(83, 83, 83)
                                 .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -461,43 +512,34 @@ public class GachUI extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(tfttengach, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(tabDSLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbbkichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(tabDSLayout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addGap(18, 18, 18)
                                         .addComponent(tftsoluong, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(66, 66, 66)
-                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(tabDSLayout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbbchatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(119, 119, 119)
+                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(tabDSLayout.createSequentialGroup()
                                         .addComponent(jLabel9)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cbbtheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(tabDSLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(cbbchatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(tabDSLayout.createSequentialGroup()
                                         .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbbncc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(tabDSLayout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(btnthem)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnchinhsua)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbbncc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(tabDSLayout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbbkichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnxoa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabDSLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(295, 295, 295)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTenChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 46, Short.MAX_VALUE))
         );
         tabDSLayout.setVerticalGroup(
             tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,24 +558,33 @@ public class GachUI extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(tftmagach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
-                                    .addComponent(cbbchatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbbchatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenChatLieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(tfttengach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8)
-                                    .addComponent(cbbncc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(cbbtheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(cbbkichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(tftsoluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(44, 44, 44)
+                                    .addComponent(cbbncc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenNhaCungCap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(tabDSLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel9)
+                                            .addComponent(cbbtheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTenTheLoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(16, 16, 16)
+                                        .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(cbbkichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTenDonVi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(tabDSLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(tftsoluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11))))
+                                .addGap(32, 32, 32)
                                 .addGroup(tabDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnchinhsua)
                                     .addComponent(btnxoa)
@@ -541,8 +592,9 @@ public class GachUI extends javax.swing.JFrame {
                                     .addComponent(jButton1)))
                             .addComponent(lblhinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
 
         tabs.addTab("Danh sách", tabDS);
@@ -576,7 +628,7 @@ public class GachUI extends javax.swing.JFrame {
                 .addGroup(tabThungracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnkhoiphuc)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 927, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         tabThungracLayout.setVerticalGroup(
             tabThungracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,12 +646,14 @@ public class GachUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 1113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -609,20 +663,20 @@ public class GachUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 150, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 90, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
-        if (check()&&checktrung()) {
+        if (check()) {
             insert();
         }        // TODO add your handling code here:
 
@@ -660,11 +714,46 @@ public class GachUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tfttimkiemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-tftmagach.setText("");
-tftsoluong.setText("");
-tfttengach.setText("");// TODO add your handling code here:
+        tftmagach.setText("");
+        tftsoluong.setText("");
+        tfttengach.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cbbchatlieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbchatlieuMouseClicked
+
+    }//GEN-LAST:event_cbbchatlieuMouseClicked
+
+    private void cbbchatlieuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbchatlieuItemStateChanged
+        String ma = this.cbbchatlieu.getSelectedItem().toString();
+        ChatLieu cl = daochatlieu.selectByID(ma);
+        if (cl.getMaChatLieu().trim().equals(ma)) {
+            this.txtTenChatLieu.setText(cl.getTenChatLieu());
+        }
+    }//GEN-LAST:event_cbbchatlieuItemStateChanged
+
+    private void cbbnccItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbnccItemStateChanged
+        String ma = this.cbbncc.getSelectedItem().toString();
+        NhaCungCap ncc = daoncc.selectByID(ma);
+        if (ncc.getMaNhaCungCap().trim().equals(ma)) {
+            this.txtTenNhaCungCap.setText(ncc.getTenNhaCungCap());
+        }
+    }//GEN-LAST:event_cbbnccItemStateChanged
+
+    private void cbbtheloaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbtheloaiItemStateChanged
+        String ma = this.cbbtheloai.getSelectedItem().toString();
+        TheLoai tl = daotheloai.selectByID(ma);
+        if(tl.getMaTheLoai().trim().equals(ma)){
+            this.txtTenTheLoai.setText(tl.getTenTheLoai());
+        }
+    }//GEN-LAST:event_cbbtheloaiItemStateChanged
+
+    private void cbbkichthuocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbkichthuocItemStateChanged
+        String ma = this.cbbkichthuoc.getSelectedItem().toString();
+        KichThuoc kt = daodonvi.selectByID(ma);
+        if(kt.getMaDonVi().trim().equals(ma)){
+            this.txtTenDonVi.setText(kt.getTenDonVi());
+        }
+    }//GEN-LAST:event_cbbkichthuocItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -741,5 +830,9 @@ tfttengach.setText("");// TODO add your handling code here:
     private javax.swing.JTextField tftsoluong;
     private javax.swing.JTextField tfttengach;
     private javax.swing.JTextField tfttimkiem;
+    private javax.swing.JLabel txtTenChatLieu;
+    private javax.swing.JLabel txtTenDonVi;
+    private javax.swing.JLabel txtTenNhaCungCap;
+    private javax.swing.JLabel txtTenTheLoai;
     // End of variables declaration//GEN-END:variables
 }

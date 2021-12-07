@@ -28,6 +28,7 @@ public class KichThuocUI extends javax.swing.JFrame {
         initComponents();
         init();
         setLocationRelativeTo(null);
+        this.txtMaKT.setEnabled(false);
     }
     public void init(){
         setTitle("Quản lý kích thước gạch");
@@ -157,10 +158,17 @@ public class KichThuocUI extends javax.swing.JFrame {
             setForm(daoKT.selectByID(tblTL.getValueAt(row, 0).toString()));
             updateStatus();
         }
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTL.getModel();
+        int index = this.tblTL.getSelectedRow();
+        if(index < 0){
+            return;
+        }
+        this.txtMaKT.setText(dtm.getValueAt(index, 0).toString());
+        this.txtTenKT.setText(dtm.getValueAt(index, 1).toString());
     }//GEN-LAST:event_tblTLMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+
         them();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -223,10 +231,6 @@ public class KichThuocUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
     KichThuoc getForm(){
-       if(txtMaKT.getText().equals("")){
-           MsgBox.alert(this, "không được để mã trống");
-           return null;
-       }
        if(txtTenKT.getText().equals("")){
            MsgBox.alert(this, "không được để tên trống");
            return null;
@@ -253,7 +257,7 @@ public class KichThuocUI extends javax.swing.JFrame {
         }
     }
     void timkiem() {
-       String ma = this.txtKichThuoc.getText();
+       String ma = this.txtTimKiem.getText();
         if(!(daoKT.selectByID(ma) == null)){
             this.txtMaKT.setText(daoKT.selectByID(ma).getMaDonVi());
             this.txtTenKT.setText(daoKT.selectByID(ma).getTenDonVi());

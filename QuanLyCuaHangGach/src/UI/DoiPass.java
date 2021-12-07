@@ -13,6 +13,8 @@ public class DoiPass extends javax.swing.JFrame {
     public DoiPass() {
         initComponents();
         setLocationRelativeTo(null);
+        this.txtTaiKhoan.setEditable(false);
+        this.txtTaiKhoan.setText(ShareUser.user.getTaiKhoan());
     }
 
     /**
