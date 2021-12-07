@@ -48,12 +48,14 @@ public class TheLoaiUI extends javax.swing.JFrame {
             e.printStackTrace();
             MsgBox.alert(this, "lỗi truy vẫn dữ liệu");
         }
-        
+
     }
-    void setForm(TheLoai tl){
+
+    void setForm(TheLoai tl) {
         txtMaTheLoai.setText(tl.getMaTheLoai());
         txtTenTheLoai.setText(tl.getTenTheLoai());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +73,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
         tblTheLoai = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
-        btnTimKiem = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +96,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTheLoai);
 
-        jLabel3.setText("Thể loại");
+        jLabel3.setText("Tìm kiếm");
 
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,10 +112,10 @@ public class TheLoaiUI extends javax.swing.JFrame {
             }
         });
 
-        btnTimKiem.setText("Tìm Kiếm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Thoát");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -130,36 +132,38 @@ public class TheLoaiUI extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtMaTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtTenTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 47, Short.MAX_VALUE)))
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 47, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnTimKiem))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtMaTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtTenTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -171,10 +175,27 @@ public class TheLoaiUI extends javax.swing.JFrame {
             setForm(daoTL.selectByID(tblTheLoai.getValueAt(row, 0).toString()));
             updateStatus();
         }
+        dtm = (DefaultTableModel) tblTheLoai.getModel();
+        int index = tblTheLoai.getSelectedRow();
+        if(index < 0){
+            return;
+        }
+        this.txtMaTheLoai.setText(dtm.getValueAt(index, 0).toString());
+        this.txtTenTheLoai.setText(dtm.getValueAt(index, 1).toString());
     }//GEN-LAST:event_tblTheLoaiMouseClicked
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-       
+        ArrayList<TheLoai> listTheLoais = daoTL.selectAll();
+        dtm.setRowCount(0);
+        for (TheLoai x : listTheLoais) {
+            if (x.getMaTheLoai().toString().contains(this.txtTimKiem.getText().trim())
+                    || x.getTenTheLoai().toString().contains(this.txtTimKiem.getText().trim())) {
+                dtm.addRow(new Object[]{
+                    x.getMaTheLoai(),
+                    x.getTenTheLoai(),
+                });
+            }
+        }
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
@@ -185,22 +206,24 @@ public class TheLoaiUI extends javax.swing.JFrame {
 //        timKiem();
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        timKiem();
-    }//GEN-LAST:event_btnTimKiemActionPerformed
-    private void timKiem(){
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void timKiem() {
         String ma = this.txtTimKiem.getText();
-        if(!(daoTL.selectByID(ma) == null)){
+        if (!(daoTL.selectByID(ma) == null)) {
             this.txtMaTheLoai.setText(daoTL.selectByID(ma).getMaTheLoai());
             this.txtTenTheLoai.setText(daoTL.selectByID(ma).getTenTheLoai());
-        }else{
+        } else {
             Helper.MsgBox.alert(this, "Mã không tôn tại");
         }
     }
+
     void updateStatus() {
         boolean click = row >= 0;
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -237,7 +260,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

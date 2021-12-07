@@ -19,8 +19,7 @@ public class BangGiaUI extends javax.swing.JFrame {
     public BangGiaUI() {
         initComponents();
         setLocationRelativeTo(null);
-        fillDS();
-        
+        fillDS();   
     }
 
     /**

@@ -2,6 +2,7 @@ package UI;
 
 import DAO.ChatLieuDao;
 import Entity.ChatLieu;
+import Entity.TheLoai;
 import Helper.MsgBox;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ChatLieuUI extends javax.swing.JFrame {
         defaullform();
         prepareGui();
         filltable();
+        this.txtmachatlieu.setEnabled(false);
     }
 
     /**
@@ -41,7 +43,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
         txttenchatlieu = new javax.swing.JTextField();
         btnthem = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
-        btnxoa = new javax.swing.JButton();
         btnclear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -61,10 +62,7 @@ public class ChatLieuUI extends javax.swing.JFrame {
 
         tblchatlieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Mã chất liệu", "Tên chất liệu"
@@ -103,13 +101,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
             }
         });
 
-        btnxoa.setText("Xóa");
-        btnxoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnxoaActionPerformed(evt);
-            }
-        });
-
         btnclear.setText("Mới");
         btnclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,21 +116,17 @@ public class ChatLieuUI extends javax.swing.JFrame {
             JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
             .addGroup(JPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblmachatlieu)
+                    .addComponent(lbltenchatlieu))
+                .addGap(13, 13, 13)
                 .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblmachatlieu)
-                            .addComponent(lbltenchatlieu)))
-                    .addGroup(JPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btnthem)))
-                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(btnthem)
                         .addGap(18, 18, 18)
                         .addComponent(btnsua, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JPanel1Layout.createSequentialGroup()
@@ -170,7 +157,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
                 .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnthem)
                     .addComponent(btnsua)
-                    .addComponent(btnxoa)
                     .addComponent(btnclear))
                 .addGap(25, 25, 25)
                 .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,10 +216,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
         sua();
     }//GEN-LAST:event_btnsuaActionPerformed
 
-    private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnxoaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -275,7 +257,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
-    private javax.swing.JButton btnxoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblmachatlieu;
@@ -302,14 +283,17 @@ public class ChatLieuUI extends javax.swing.JFrame {
     }
     
     void timkiem() {
-       String ma = this.txttimkiem.getText();
-        if(!(daocl.selectByID(ma) == null)){
-            this.txtmachatlieu.setText(daocl.selectByID(ma).getMaChatLieu());
-            this.txttenchatlieu.setText(daocl.selectByID(ma).getTenChatLieu());
-           
-        }else{
-            MsgBox.alert(this, "Mã chất liệu mượn không tồn tại");
+       ArrayList<ChatLieu> listTheLoai = daocl.selectAll();
+       model.setRowCount(0);
+        for (ChatLieu x : listTheLoai) {
+            if(x.getMaChatLieu().toString().contains(txttimkiem.getText().trim()) || x.getTenChatLieu().toString().contains(txttimkiem.getText().trim())){
+                model.addRow(new Object[]{
+                    x.getMaChatLieu(),
+                    x.getTenChatLieu(),
+                });
+            }
         }
+    
     }
     
     void prepareGui() {
@@ -331,13 +315,11 @@ public class ChatLieuUI extends javax.swing.JFrame {
         row = -1;
         txtmachatlieu.setText("");
         txttenchatlieu.setText("");
-        btnxoa.setEnabled(false);
         btnsua.setEnabled(false);
     }
 
     void updateStatus() {
         boolean click = row >= 0;
-        btnxoa.setEnabled(click);
         btnsua.setEnabled(click);
         txtmachatlieu.setEnabled(!click);
         
@@ -370,9 +352,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
     
     private boolean checknull() {
         StringBuilder sb = new StringBuilder();
-        if (txtmachatlieu.getText().equals("")) {
-            sb.append("Bạn chưa nhập Mã chất liệu \n\n");
-        }
         if (txttenchatlieu.getText().equals("")) {
             sb.append("Bạn chưa nhập Tên chất liệu \n\n");
         }
@@ -395,7 +374,6 @@ public class ChatLieuUI extends javax.swing.JFrame {
         txttenchatlieu.setText("");
         txtmachatlieu.setEnabled(true);
         btnsua.setEnabled(false);
-        btnxoa.setEnabled(false);
     }
     
     private void sua() {
