@@ -22,7 +22,7 @@ public class GachDAO extends DAO<Gach, String>{
     String UPDATE_SO_LUONG = "UPDATE GACH SET SOLUONG=? WHERE MAGACH = ?";
     
      public void capNhatSoLuong(Gach entity) {
-        jdbcHelper.update(UPDATE_SQL,entity.getSoLuong(),entity.getMaGach());
+        jdbcHelper.update(UPDATE_SO_LUONG,entity.getSoLuong(),entity.getMaGach());
     }
      
     @Override

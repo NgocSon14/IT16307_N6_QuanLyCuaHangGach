@@ -83,6 +83,7 @@ public class BangGiaUI extends javax.swing.JFrame {
         txttendonvi = new javax.swing.JTextField();
         txttenchatlieu = new javax.swing.JTextField();
         txttentheloai = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -205,6 +206,13 @@ public class BangGiaUI extends javax.swing.JFrame {
 
         jLabel12.setText("Tên đơn vị");
 
+        jButton1.setText("Thoát");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
         tab1.setLayout(tab1Layout);
         tab1Layout.setHorizontalGroup(
@@ -218,9 +226,7 @@ public class BangGiaUI extends javax.swing.JFrame {
                             .addGroup(tab1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tab1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(2, 2, 2))
+                                    .addComponent(jLabel1)
                                     .addComponent(jLabel3)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -269,7 +275,9 @@ public class BangGiaUI extends javax.swing.JFrame {
                     .addGroup(tab1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(btncapnhapgia)
-                        .addGap(119, 119, 119))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jScrollPane2)
         );
         tab1Layout.setVerticalGroup(
@@ -317,7 +325,9 @@ public class BangGiaUI extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(txttentheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(btncapnhapgia)))
+                        .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btncapnhapgia)
+                            .addComponent(jButton1))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -407,6 +417,10 @@ String ma = this.cbomadonvi.getSelectedItem().toString();
         
     }//GEN-LAST:event_cbotheloaiItemStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -451,6 +465,7 @@ String ma = this.cbomadonvi.getSelectedItem().toString();
     private javax.swing.JComboBox<String> cbomadonvi;
     private javax.swing.JComboBox<String> cbomancc;
     private javax.swing.JComboBox<String> cbotheloai;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
