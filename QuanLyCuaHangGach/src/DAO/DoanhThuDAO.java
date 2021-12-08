@@ -9,48 +9,21 @@ import Entity.DoanhThu;
 import Helper.jdbcHelper;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
+
 /**
  *
  * @author Asus
  */
-public class DoanhThuDAO extends DAO<DoanhThu, String>{
-    String SELECT_THANG = "Select distinct month(NGAYXUAT) FROM PHIEUXUAT";
-    String SELECT_ALL_DOANHTHU = "Select * from PHIEUXUATCHITIET INNER JOIN GACH ON PHIEUXUATCHITIET.MAGACH = GACH.MAGACH INNER JOIN PHIEUXUAT ON PHIEUXUATCHITIET.MAPHIEUXUAT = PHIEUXUAT.MAPHIEUXUAT";
-    
-    public ArrayList<DoanhThu> selectThang() {
-        return this.selectBySql(SELECT_THANG);
-    }
-    @Override
-    public void them(DoanhThu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class DoanhThuDAO {
 
-    @Override
-    public void capNhat(DoanhThu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void xoa(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<DoanhThu> selectAll() {
-        return this.selectBySql(SELECT_ALL_DOANHTHU);
-    }
-
-    @Override
-    public DoanhThu selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected ArrayList<DoanhThu> selectBySql(String sql, Object... args) {
+    public List<DoanhThu> getDoanhthu(int thang, int nam) {
         ArrayList<DoanhThu> listDt = new ArrayList<>();
         try {
-            ResultSet rs = jdbcHelper.query(sql, args);
-            while (rs.next()) {                
+            ResultSet rs = null;
+            String sql = "SELECT * FROM dbo.PHIEUXUATCHITIET JOIN dbo.GACH ON GACH.MAGACH = PHIEUXUATCHITIET.MAGACH JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAPHIEUXUAT = PHIEUXUATCHITIET.MAPHIEUXUAT WHERE MONTH(NGAYXUAT)=? AND YEAR(NGAYXUAT)=?";
+            rs = jdbcHelper.query(sql, thang, nam);
+            while (rs.next()) {
                 DoanhThu dt = new DoanhThu();
                 dt.setNgayXuat(rs.getDate("NGAYXUAT"));
                 dt.setMaGach(rs.getString("MAGACH"));
@@ -65,5 +38,43 @@ public class DoanhThuDAO extends DAO<DoanhThu, String>{
             throw new RuntimeException(e);
         }
     }
-    
+
+    public List<Object> getThangDoanhThu(int nam) {
+        List<Object> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = jdbcHelper.query("SELECT DISTINCT MONTH(NGAYXUAT) FROM dbo.PHIEUXUATCHITIET JOIN dbo.GACH ON GACH.MAGACH = PHIEUXUATCHITIET.MAGACH JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAPHIEUXUAT = PHIEUXUATCHITIET.MAPHIEUXUAT ");
+                while (rs.next()) {
+                    int thang = rs.getInt(1);
+                    list.add(thang);
+
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+    public List<Object> getNamDoanhThu() {
+        List<Object> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = jdbcHelper.query("SELECT DISTINCT YEAR(NGAYXUAT) FROM dbo.PHIEUXUATCHITIET JOIN dbo.GACH ON GACH.MAGACH = PHIEUXUATCHITIET.MAGACH JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAPHIEUXUAT = PHIEUXUATCHITIET.MAPHIEUXUAT ");
+                while (rs.next()) {
+                    int thang = rs.getInt(1);
+                    list.add(thang);
+
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
 }
