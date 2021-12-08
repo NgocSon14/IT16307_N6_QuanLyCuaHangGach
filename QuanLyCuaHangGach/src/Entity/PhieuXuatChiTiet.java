@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Asus
@@ -13,18 +15,22 @@ public class PhieuXuatChiTiet {
     private String maPhieuXuatChiTiet,maPhieuXuat,maGach,nhaCungCap;
     private int soLuong;
     private float giaBan;
+    private Date ngayXuat;
+    private String maKh;
     private boolean trangThai;
 
     public PhieuXuatChiTiet() {
     }
 
-    public PhieuXuatChiTiet(String maPhieuXuatChiTiet, String maPhieuXuat, String maGach, String nhaCungCap, int soLuong, float giaBan, boolean trangThai) {
+    public PhieuXuatChiTiet(String maPhieuXuatChiTiet, String maPhieuXuat, String maGach, String nhaCungCap, int soLuong, float giaBan, Date ngayXuat, String maKh, boolean trangThai) {
         this.maPhieuXuatChiTiet = maPhieuXuatChiTiet;
         this.maPhieuXuat = maPhieuXuat;
         this.maGach = maGach;
         this.nhaCungCap = nhaCungCap;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.ngayXuat = ngayXuat;
+        this.maKh = maKh;
         this.trangThai = trangThai;
     }
 
@@ -76,6 +82,22 @@ public class PhieuXuatChiTiet {
         this.giaBan = giaBan;
     }
 
+    public Date getNgayXuat() {
+        return ngayXuat;
+    }
+
+    public void setNgayXuat(Date ngayXuat) {
+        this.ngayXuat = ngayXuat;
+    }
+
+    public String getMaKh() {
+        return maKh;
+    }
+
+    public void setMaKh(String maKh) {
+        this.maKh = maKh;
+    }
+
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -83,6 +105,8 @@ public class PhieuXuatChiTiet {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
+    
+    
    
     
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
 
+    String SELECT_ID = "select PHIEUXUAT.MAPHIEUXUAT from PHIEUXUAT";
     String SELECT_ALL_SQL = "select * from PHIEUXUAT";
     String SELECT_BY_ID_SQL = "select * from PHIEUXUAT where MAPHIEUXUAT =?";
     String INSERT_SQL = "insert into PHIEUXUAT(NGAYXUAT,MAKHACHHANG,TRANGTHAI) values(?,?,?)";
@@ -15,7 +16,10 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
     String UPDATE_SQL = "update PHIEUXUAT set NGAYXUAT = ?, MAKHACHHANG = ?, TRANGTHAI=? where MAPHIEUXUAT = ?";
     String UPDATE_TRANHTHAI_SQL = "update PHIEUXUAT set TRANGTHAI=0 where MAPHIEUXUAT=?";
 
-    
+     public ArrayList<PhieuXuat> selectAllID() {
+        return this.selectBySql(SELECT_ID);
+    }
+     
     public void capNhatTrangThai(String key) {
         jdbcHelper.update(UPDATE_TRANHTHAI_SQL,key);
     }
@@ -59,7 +63,6 @@ public class PhieuXuatDAO extends DAO<PhieuXuat, String> {
                 entity.setNgayXuat(rs.getDate("NGAYXUAT"));
                 entity.setMaKhachHang(rs.getString("MAKHACHHANG"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
-
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

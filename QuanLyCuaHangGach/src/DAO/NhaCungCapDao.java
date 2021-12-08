@@ -15,60 +15,74 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class NhaCungCapDao extends DAO<NhaCungCap, String>{
-   String SQL_Update="update NHACUNGCAP set TENNHACUNGCAP=?,DIACHI=?,SODIENTHOAI=?,EMAIL=?,THONGTINKHAC=?,TRANGTHAI=? where MANHACUNGCAP=?";
-   String SQL_Delete="update NHACUNGCAP set TRANGTHAI=0 where MANHACUNGCAP=?";
+public class NhaCungCapDao extends DAO<NhaCungCap, String> {
 
-    String SQL_SelectAll="select*from NHACUNGCAP";
-    String SQL_SelectID="select*from NHACUNGCAP where MANHACUNGCAP=?";
+    String SQL_Update = "update NHACUNGCAP set TENNHACUNGCAP=?,DIACHI=?,SODIENTHOAI=?,EMAIL=?,THONGTINKHAC=?,TRANGTHAI=? where MANHACUNGCAP=?";
+    String SQL_Delete = "update NHACUNGCAP set TRANGTHAI=0 where MANHACUNGCAP=?";
+
+    String SQL_SelectAll = "select*from NHACUNGCAP";
+    String SQL_SelectID = "select*from NHACUNGCAP where MANHACUNGCAP=?";
+    String SQL_SelectName = "select*from NHACUNGCAP where TENNHACUNGCAP=?";
     String SQL_INSERT = "INSERT INTO NHACUNGCAP(TENNHACUNGCAP,DIACHI,SODIENTHOAI,EMAIL,THONGTINKHAC,TRANGTHAI) VALUES (?,?,?,?,?,?)";
+    
+    
+      public NhaCungCap selectByName(String key) {
+        ArrayList<NhaCungCap> listNCC = this.selectBySql(SQL_SelectName, key);
+
+        if (listNCC.isEmpty()) {
+            return null;
+        } else {
+            return listNCC.get(0);
+        }
+
+    }
+      
     @Override
     public void them(NhaCungCap entity) {
-        jdbcHelper.update(SQL_INSERT, entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai() == false);
+        jdbcHelper.update(SQL_INSERT, entity.getTenNhaCungCap(), entity.getDiaChi(), entity.getSDT(), entity.getEmail(), entity.getThongTinKhac(), entity.isTrangThai() == false);
     }
 
     @Override
     public void capNhat(NhaCungCap entity) {
-         jdbcHelper.update(SQL_Update, entity.getTenNhaCungCap(),entity.getDiaChi(),entity.getSDT(),entity.getEmail(),entity.getThongTinKhac(),entity.isTrangThai(),entity.getMaNhaCungCap());
+        jdbcHelper.update(SQL_Update, entity.getTenNhaCungCap(), entity.getDiaChi(), entity.getSDT(), entity.getEmail(), entity.getThongTinKhac(), entity.isTrangThai(), entity.getMaNhaCungCap());
     }
 
     @Override
     public void xoa(String key) {
-     jdbcHelper.update(SQL_Delete, key); 
+        jdbcHelper.update(SQL_Delete, key);
     }
 
     @Override
     public ArrayList<NhaCungCap> selectAll() {
-       return this.selectBySql(SQL_SelectAll);//To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(SQL_SelectAll);//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public NhaCungCap selectByID(String key) {
-     ArrayList<NhaCungCap> listNCC= this.selectBySql(SQL_SelectID,key); 
+        ArrayList<NhaCungCap> listNCC = this.selectBySql(SQL_SelectID, key);
 
-if(listNCC.isEmpty()){
-return null;
-}else
-{
-return listNCC.get(0);
-}
+        if (listNCC.isEmpty()) {
+            return null;
+        } else {
+            return listNCC.get(0);
+        }
 
     }
 
     @Override
     protected ArrayList<NhaCungCap> selectBySql(String sql, Object... args) {
-      ArrayList<NhaCungCap> listNCC= new ArrayList<>();
+        ArrayList<NhaCungCap> listNCC = new ArrayList<>();
         try {
-            ResultSet rs=jdbcHelper.query(sql, args);
+            ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
-listNCC.add(new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6), rs.getBoolean(7)));          
+                listNCC.add(new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7)));
             }
             rs.getStatement().getConnection().close();
             return listNCC;
-            
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 //To change body of generated methods, choose Tools | Templates.
-    }  
+    }
 }
