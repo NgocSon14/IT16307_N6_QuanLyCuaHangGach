@@ -59,10 +59,6 @@ public class PhieuXuat {
         this.trangThai = trangThai;
     }
 
-    @Override
-    public String toString() {
-        return "PhieuXuat{" + "maPhieuXuat=" + maPhieuXuat + ", ngayXuat=" + ngayXuat + ", maKhachHang=" + maKhachHang + ", trangThai=" + trangThai + '}';
-    }
     
     
 }

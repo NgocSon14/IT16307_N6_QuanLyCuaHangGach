@@ -92,6 +92,6 @@ public class NhaCungCap {
   
     @Override
     public String toString() {
-        return "NhaCungCap{" + "MaNhaCungCap=" + MaNhaCungCap + ", TenNhaCungCap=" + TenNhaCungCap + ", DiaChi=" + DiaChi + ", SDT=" + SDT + ", ThongTinKhac=" + ThongTinKhac + ", TrangThai=" + TrangThai + '}';
+        return MaNhaCungCap;
     }
 }

@@ -45,7 +45,11 @@ public class BangGiaDao extends DAO<BangGia, String> {
 
     @Override
     public BangGia selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ArrayList<BangGia> listBg = selectBySql(SELECT_GIA, key);
+        if(listBg.isEmpty()){
+            return null;
+        }
+       return listBg.get(0);
     }
 
     @Override
