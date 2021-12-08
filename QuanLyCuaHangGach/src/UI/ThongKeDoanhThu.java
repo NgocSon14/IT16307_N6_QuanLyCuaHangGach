@@ -1,33 +1,26 @@
+
 package UI;
 
 import DAO.DoanhThuDAO;
 import Entity.DoanhThu;
-import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+
 
 public class ThongKeDoanhThu extends javax.swing.JPanel {
-
     DoanhThuDAO daoDt = new DoanhThuDAO();
     DefaultTableModel dtm;
-    double Tong = 0;
+    double Tong=0;
     ArrayList<DoanhThu> listDt;
-
     public ThongKeDoanhThu() {
         initComponents();
 //        HienThiLenTableDTT();
-        fillComboxNam();
+fillComboxNam();
 //fillTableDoanhThu();
-        fillComboBoxThang();
+fillComboBoxThang();
 
     }
 //    private void HienThiLenTableDTT(){
@@ -45,17 +38,15 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 //            dtm.addRow(rowData);
 //        }
 //    }
-
-    void fillComboxNam() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
+     void fillComboxNam(){
+         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
         this.cbbnam.removeAllItems();
         List<Object> list = daoDt.getNamDoanhThu(); //lấy đc dữ liệu 
         for (Object nam : list) { // tạo vòng for duyệt từ đầu đến cuối cái list 
             this.cbbnam.addItem(nam.toString());
         }
     }
-
-    void fillComboBoxThang() {
+     void fillComboBoxThang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
         this.cbbthang.removeAllItems();
         String year = this.cbbnam.getSelectedItem() + "";
@@ -64,15 +55,14 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         }
         int nam = Integer.parseInt(year);
         List<Object> list = daoDt.getThangDoanhThu(nam); //lấy đc dữ liệu 
-
+        
         for (Object thang : list) { // tạo vòng for duyệt từ đầu đến cuối cái list 
             this.cbbthang.addItem(thang.toString());
         }
         fillTableDoanhThu();
 
     }
-
-    void fillTableDoanhThu() {
+     void fillTableDoanhThu() {
 
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuThang.getModel();
         model.setRowCount(0); // xóa toàn bộ dữ liệu có trong tabke
@@ -83,14 +73,14 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
             return;
         } else {
             System.out.println(cbbthang.getSelectedItem());
-
+            
             int thang = Integer.parseInt(cbb);
             int nam = Integer.parseInt(year);
 
             List<DoanhThu> list = daoDt.getDoanhthu(thang, nam);  // tạo list đổ dữ liệu từ list vào model
-            this.Tong = 0; // khai báo biến tổng =0 (Nếu k có nó sẽ cộng dồn)
+            this.Tong=0; // khai báo biến tổng =0 (Nếu k có nó sẽ cộng dồn)
             for (DoanhThu row : list) {
-                Object[] object = new Object[]{
+                Object[] object= new Object[]{
                     row.getNgayXuat(),
                     row.getMaGach(),
                     row.getTenGach(),
@@ -98,27 +88,27 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                     row.getGiaBan()
                 };
                 model.addRow(object);
-                this.Tong += row.getGiaBan(); // thực hiện cộng thành tiền
+               this.Tong +=row.getGiaBan(); // thực hiện cộng thành tiền
             }
         }
     }
-
-    private void TongThang() {
+     private void TongThang() {
         DecimalFormat x = new DecimalFormat("###,###,###");
         /*
         Tạo một biến x để đặt định dạng cho số,
         ở đây cứ 3 số nguyên sẽ được ngăn cách bằng 1 dấu phẩy,
         phần thập phân và phần nguyên được ngăn cách bởi dấu chấm,
-         */
-        //dùng để format (định dạng) ... decimal (số thập phân).
+        */
+       //dùng để format (định dạng) ... decimal (số thập phân).
         int Tong = 0;
         for (int i = 0; i < tblDoanhThuThang.getRowCount(); i++) { // lấy dữ lệu ở các row
             Tong += Integer.parseInt(tblDoanhThuThang.getValueAt(i, 3).toString()); // thực hiện cộng
         }
         lblTien.setText("Tổng Doanh Thu Của Tháng: " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
-
+        
     }
-
+    
+    
 //   
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,11 +124,13 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDoanhThuThang = new javax.swing.JTable();
         lblTien = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbbnam = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cbbthang = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -162,12 +154,10 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 
         lblTien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setText("TỔNG :");
+
         jButton2.setText("BIỂU ĐỒ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Năm");
 
@@ -194,18 +184,21 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 510, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTien, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbbnam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(185, 185, 185)
+                        .addComponent(cbbnam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(228, 228, 228)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(cbbthang, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbbthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -221,13 +214,28 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTien, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addGap(18, 18, 18))
         );
 
-        jTabbedPane1.addTab("THỐNG KÊ DOANH THU", jPanel1);
+        jTabbedPane1.addTab("DOANH THU THÁNG ", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1174, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("DOANH THU CÁC NĂM ", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -242,52 +250,15 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbthangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbthangActionPerformed
-        fillTableDoanhThu();
-        TongThang();// TODO add your handling code here:
+fillTableDoanhThu();    
+TongThang();// TODO add your handling code here:
     }//GEN-LAST:event_cbbthangActionPerformed
 
     private void cbbnamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbnamActionPerformed
-        fillComboBoxThang();        // TODO add your handling code here:
+fillComboBoxThang();        // TODO add your handling code here:
     }//GEN-LAST:event_cbbnamActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        DecimalFormat x = new DecimalFormat("###,###,###");
-        /*
-        Tạo một biến x để đặt định dạng cho số,
-        ở đây cứ 3 số nguyên sẽ được ngăn cách bằng 1 dấu phẩy,
-        phần thập phân và phần nguyên được ngăn cách bởi dấu chấm,
-         */
-        //dùng để format (định dạng) ... decimal (số thập phân).
-        int Tong = 0;
-        for (int i = 0; i < tblDoanhThuThang.getRowCount(); i++) { // lấy dữ lệu ở các row
-            Tong += Integer.parseInt(tblDoanhThuThang.getValueAt(i, 3).toString()); // thực hiện cộng
-        }
-
-        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        dcd.setValue(Tong, "VND", "THÁNG 1");
-        dcd.setValue(Tong, "VND", "THÁNG 2");
-        dcd.setValue(Tong, "VND", "THÁNG 3");
-        dcd.setValue(Tong, "VND", "THÁNG 4");
-        dcd.setValue(Tong, "VND", "THÁNG 5");
-        dcd.setValue(Tong, "VND", "THÁNG 6");
-        dcd.setValue(Tong, "VND", "THÁNG 7");
-        dcd.setValue(Tong, "VND", "THÁNG 8");
-        dcd.setValue(Tong, "VND", "THÁNG 9");
-        dcd.setValue(Tong, "VND", "THÁNG 10");
-        dcd.setValue(Tong, "VND", "THÁNG 11");
-        dcd.setValue(Tong, "VND", "THÁNG 12");
-        JFreeChart jchart = ChartFactory.createBarChart("THỐNG KÊ DOANH THU", "THÁNG", "", dcd, PlotOrientation.VERTICAL, true, true, false);
-
-        CategoryPlot plot = jchart.getCategoryPlot();
-        plot.setRangeGridlinePaint(Color.BLACK);
-
-        ChartFrame chartfrm = new ChartFrame("Bảng doanh thu", jchart, true);
-        chartfrm.setVisible(true);
-        chartfrm.setSize(1500, 1500);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    public static void main(String args[]) {
+   public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -314,7 +285,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongKeDoanhThu().setVisible(true);
+               new ThongKeDoanhThu().setVisible(true);
             }
         });
     }
@@ -323,8 +294,10 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbbthang;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblTien;
