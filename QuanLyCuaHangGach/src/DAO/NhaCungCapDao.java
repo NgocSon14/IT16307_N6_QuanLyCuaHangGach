@@ -39,7 +39,8 @@ public class NhaCungCapDao extends DAO<NhaCungCap, String> {
       
     @Override
     public void them(NhaCungCap entity) {
-        jdbcHelper.update(SQL_INSERT, entity.getTenNhaCungCap(), entity.getDiaChi(), entity.getSDT(), entity.getEmail(), entity.getThongTinKhac(), entity.isTrangThai() == false);
+
+        jdbcHelper.update(SQL_INSERT, entity.getTenNhaCungCap(), entity.getDiaChi(), entity.getSDT(), entity.getEmail(), entity.getThongTinKhac(), entity.isTrangThai() == true);
     }
 
     @Override
