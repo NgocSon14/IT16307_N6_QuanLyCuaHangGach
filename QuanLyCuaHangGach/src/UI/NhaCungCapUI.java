@@ -177,6 +177,18 @@ public class NhaCungCapUI extends javax.swing.JFrame {
         }
 
     }
+     void insert() {
+        NhaCungCap ncc = getform();
+        try {
+            daoncc.them(ncc);
+            fillDS();
+            fillLT();
+            defaullform();
+            MsgBox.alert(this, "Thêm nhà cung cấp thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm thất bại");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -210,6 +222,8 @@ public class NhaCungCapUI extends javax.swing.JFrame {
         txtthongtinkhac = new javax.swing.JTextArea();
         btnxoa = new javax.swing.JButton();
         btnchinhsua = new javax.swing.JButton();
+        btnxoa1 = new javax.swing.JButton();
+        btnxoa2 = new javax.swing.JButton();
         tab3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLT = new javax.swing.JTable();
@@ -294,6 +308,8 @@ public class NhaCungCapUI extends javax.swing.JFrame {
 
         jLabel2.setText("Mã NCC:");
 
+        txtmancc.setEnabled(false);
+
         jLabel3.setText("Tên NCC:");
 
         jLabel4.setText("Địa chỉ:");
@@ -322,45 +338,59 @@ public class NhaCungCapUI extends javax.swing.JFrame {
             }
         });
 
+        btnxoa1.setText("Thêm");
+        btnxoa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoa1ActionPerformed(evt);
+            }
+        });
+
+        btnxoa2.setText("Clear");
+        btnxoa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoa2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tab2Layout = new javax.swing.GroupLayout(tab2);
         tab2.setLayout(tab2Layout);
         tab2Layout.setHorizontalGroup(
             tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab2Layout.createSequentialGroup()
-                .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(96, 96, 96)
+                .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(tab2Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addComponent(jLabel4)
+                        .addGap(42, 42, 42)
+                        .addComponent(txtdiachi, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tab2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(42, 42, 42)
+                        .addComponent(txttenncc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tab2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(42, 42, 42)
+                        .addComponent(txtmancc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tab2Layout.createSequentialGroup()
+                        .addComponent(btnxoa1)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnchinhsua)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnxoa2)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnxoa))
+                    .addGroup(tab2Layout.createSequentialGroup()
                         .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(tab2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(42, 42, 42)
-                                .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tab2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(42, 42, 42)
-                                .addComponent(txtdiachi, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tab2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(42, 42, 42)
-                                .addComponent(txttenncc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tab2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(42, 42, 42)
-                                .addComponent(txtmancc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tab2Layout.createSequentialGroup()
-                                .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(42, 42, 42)
-                                .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(tab2Layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
-                        .addComponent(btnxoa)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnchinhsua)))
-                .addContainerGap(216, Short.MAX_VALUE))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(42, 42, 42)
+                        .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtsdt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         tab2Layout.setVerticalGroup(
             tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,18 +415,17 @@ public class NhaCungCapUI extends javax.swing.JFrame {
                 .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tab2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7))
-                    .addGroup(tab2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44)
+                    .addComponent(jLabel7)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnxoa)
-                    .addComponent(btnchinhsua))
-                .addContainerGap(139, Short.MAX_VALUE))
+                    .addComponent(btnchinhsua)
+                    .addComponent(btnxoa2)
+                    .addComponent(btnxoa1)
+                    .addComponent(btnxoa))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         tabs.addTab("Thông tin", tab2);
@@ -491,6 +520,23 @@ public class NhaCungCapUI extends javax.swing.JFrame {
         timkiem();
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
+    private void btnxoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoa1ActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnxoa1ActionPerformed
+
+    private void btnxoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoa2ActionPerformed
+        // TODO add your handling code here:
+        
+       txtTimKiem.setText("");
+       txtdiachi.setText("");
+       txtemail.setText("");
+       txtsdt.setText("");
+       txttenncc.setText("");
+       txtthongtinkhac.setText("");
+       
+    }//GEN-LAST:event_btnxoa2ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -529,6 +575,8 @@ public class NhaCungCapUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnchinhsua;
     private javax.swing.JButton btnxoa;
+    private javax.swing.JButton btnxoa1;
+    private javax.swing.JButton btnxoa2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
