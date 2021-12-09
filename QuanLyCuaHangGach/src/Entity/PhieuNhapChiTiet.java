@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Admin
@@ -17,18 +19,22 @@ public class PhieuNhapChiTiet {
     private int soluong;
     private float giaNhap;
     private float giaBan;
+    private String maNhaCungCap;
+    private Date ngayNhap;
     private boolean trangThai;
 
     public PhieuNhapChiTiet() {
     }
 
-    public PhieuNhapChiTiet(String MaPhieuNhapChiTiet, String maPhieuNhap, String maGach, int soluong, float giaNhap, float giaBan, boolean trangThai) {
+    public PhieuNhapChiTiet(String MaPhieuNhapChiTiet, String maPhieuNhap, String maGach, int soluong, float giaNhap, float giaBan, String maNhaCungCap, Date ngayNhap, boolean trangThai) {
         this.MaPhieuNhapChiTiet = MaPhieuNhapChiTiet;
         this.maPhieuNhap = maPhieuNhap;
         this.maGach = maGach;
         this.soluong = soluong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
+        this.maNhaCungCap = maNhaCungCap;
+        this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
     }
 
@@ -80,6 +86,22 @@ public class PhieuNhapChiTiet {
         this.giaBan = giaBan;
     }
 
+    public String getMaNhaCungCap() {
+        return maNhaCungCap;
+    }
+
+    public void setMaNhaCungCap(String maNhaCungCap) {
+        this.maNhaCungCap = maNhaCungCap;
+    }
+
+    public Date getNgayNhap() {
+        return ngayNhap;
+    }
+
+    public void setNgayNhap(Date ngayNhap) {
+        this.ngayNhap = ngayNhap;
+    }
+
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -88,5 +110,4 @@ public class PhieuNhapChiTiet {
         this.trangThai = trangThai;
     }
 
-   
 }

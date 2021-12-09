@@ -1,4 +1,3 @@
-
 package UI;
 
 import DAO.DoanhThuDAO;
@@ -9,18 +8,19 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ThongKeDoanhThu extends javax.swing.JPanel {
+
     DoanhThuDAO daoDt = new DoanhThuDAO();
     DefaultTableModel dtm;
-    double Tong=0;
+    double Tong = 0;
     ArrayList<DoanhThu> listDt;
+
     public ThongKeDoanhThu() {
         initComponents();
 //        HienThiLenTableDTT();
-fillComboxNam();
+        fillComboxNam();
 //fillTableDoanhThu();
-fillComboBoxThang();
+        fillComboBoxThang();
 
     }
 //    private void HienThiLenTableDTT(){
@@ -38,15 +38,17 @@ fillComboBoxThang();
 //            dtm.addRow(rowData);
 //        }
 //    }
-     void fillComboxNam(){
-         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
+
+    void fillComboxNam() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
         this.cbbnam.removeAllItems();
         List<Object> list = daoDt.getNamDoanhThu(); //lấy đc dữ liệu 
         for (Object nam : list) { // tạo vòng for duyệt từ đầu đến cuối cái list 
             this.cbbnam.addItem(nam.toString());
         }
     }
-     void fillComboBoxThang() {
+
+    void fillComboBoxThang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbthang.getModel();
         this.cbbthang.removeAllItems();
         String year = this.cbbnam.getSelectedItem() + "";
@@ -55,14 +57,15 @@ fillComboBoxThang();
         }
         int nam = Integer.parseInt(year);
         List<Object> list = daoDt.getThangDoanhThu(nam); //lấy đc dữ liệu 
-        
+
         for (Object thang : list) { // tạo vòng for duyệt từ đầu đến cuối cái list 
             this.cbbthang.addItem(thang.toString());
         }
         fillTableDoanhThu();
 
     }
-     void fillTableDoanhThu() {
+
+    void fillTableDoanhThu() {
 
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuThang.getModel();
         model.setRowCount(0); // xóa toàn bộ dữ liệu có trong tabke
@@ -73,14 +76,14 @@ fillComboBoxThang();
             return;
         } else {
             System.out.println(cbbthang.getSelectedItem());
-            
+
             int thang = Integer.parseInt(cbb);
             int nam = Integer.parseInt(year);
 
             List<DoanhThu> list = daoDt.getDoanhthu(thang, nam);  // tạo list đổ dữ liệu từ list vào model
-            this.Tong=0; // khai báo biến tổng =0 (Nếu k có nó sẽ cộng dồn)
+            this.Tong = 0; // khai báo biến tổng =0 (Nếu k có nó sẽ cộng dồn)
             for (DoanhThu row : list) {
-                Object[] object= new Object[]{
+                Object[] object = new Object[]{
                     row.getNgayXuat(),
                     row.getMaGach(),
                     row.getTenGach(),
@@ -88,27 +91,27 @@ fillComboBoxThang();
                     row.getGiaBan()
                 };
                 model.addRow(object);
-               this.Tong +=row.getGiaBan(); // thực hiện cộng thành tiền
+                this.Tong += row.getGiaBan(); // thực hiện cộng thành tiền
             }
         }
     }
-     private void TongThang() {
+
+    private void TongThang() {
         DecimalFormat x = new DecimalFormat("###,###,###");
         /*
         Tạo một biến x để đặt định dạng cho số,
         ở đây cứ 3 số nguyên sẽ được ngăn cách bằng 1 dấu phẩy,
         phần thập phân và phần nguyên được ngăn cách bởi dấu chấm,
-        */
-       //dùng để format (định dạng) ... decimal (số thập phân).
+         */
+        //dùng để format (định dạng) ... decimal (số thập phân).
         int Tong = 0;
         for (int i = 0; i < tblDoanhThuThang.getRowCount(); i++) { // lấy dữ lệu ở các row
             Tong += Integer.parseInt(tblDoanhThuThang.getValueAt(i, 3).toString()); // thực hiện cộng
         }
         lblTien.setText("Tổng Doanh Thu Của Tháng: " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
-        
+
     }
-    
-    
+
 //   
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,6 +161,11 @@ fillComboBoxThang();
         jLabel3.setText("TỔNG :");
 
         jButton2.setText("BIỂU ĐỒ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Năm");
 
@@ -186,7 +194,7 @@ fillComboBoxThang();
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTien, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,11 +202,11 @@ fillComboBoxThang();
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbbnam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(228, 228, 228)
+                        .addComponent(cbbnam, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(cbbthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbbthang, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -250,15 +258,19 @@ fillComboBoxThang();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbthangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbthangActionPerformed
-fillTableDoanhThu();    
-TongThang();// TODO add your handling code here:
+        fillTableDoanhThu();
+        TongThang();// TODO add your handling code here:
     }//GEN-LAST:event_cbbthangActionPerformed
 
     private void cbbnamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbnamActionPerformed
-fillComboBoxThang();        // TODO add your handling code here:
+        fillComboBoxThang();        // TODO add your handling code here:
     }//GEN-LAST:event_cbbnamActionPerformed
 
-   public static void main(String args[]) {
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -285,7 +297,7 @@ fillComboBoxThang();        // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new ThongKeDoanhThu().setVisible(true);
+                new ThongKeDoanhThu().setVisible(true);
             }
         });
     }

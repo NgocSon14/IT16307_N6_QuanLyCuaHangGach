@@ -20,6 +20,7 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 public class NhapHangUI extends javax.swing.JFrame {
+
     DefaultTableModel dtm;
     PhieuNhapDAO daoPn = new PhieuNhapDAO();
     PhieuNhapChiTietDAO daoPnct = new PhieuNhapChiTietDAO();
@@ -28,6 +29,7 @@ public class NhapHangUI extends javax.swing.JFrame {
     ChatLieuDao daoCl = new ChatLieuDao();
     KichThuocDAO daoKt = new KichThuocDAO();
     int soLuongGach;
+    String KeyId;
 
     public NhapHangUI() {
         initComponents();
@@ -37,35 +39,48 @@ public class NhapHangUI extends javax.swing.JFrame {
         this.txtMaPhieuNhap.setEnabled(false);
         this.txtMaPhieuNhapCT1.setEnabled(false);
         this.txtNhaCungCap.setEnabled(false);
+        this.txtTenGach.setEnabled(false);
+        this.txtChatLieu.setEnabled(false);
+        this.txtKichThuoc.setEnabled(false);
         this.NewCbbNcc();
         this.NewCbbGach();
         HienThiNhaCc();
     }
-    private void NewCbbNcc(){
+
+    private void LayMa() {
+        ArrayList<PhieuNhap> listPn = daoPn.selectAll();
+        for (PhieuNhap x : listPn) {
+            KeyId = x.getMaPhieuNhap();
+        }
+        this.txtMaPhieuNhap.setText(KeyId);
+    }
+
+    private void NewCbbNcc() {
         ArrayList<NhaCungCap> listNcc = daoNcc.selectAll();
         for (NhaCungCap x : listNcc) {
             cbbTenNhaCC.addItem(x.getTenNhaCungCap());
         }
     }
-    private void NewCbbGach(){
+
+    private void NewCbbGach() {
         ArrayList<Gach> listGach = daoGach.selectAll();
         for (Gach x : listGach) {
             cbbMaGach.addItem(x.getMaGach());
         }
     }
-    private void HienThiNhaCc(){
+
+    private void HienThiNhaCc() {
         dtm = (DefaultTableModel) this.tblNcc.getModel();
         dtm.setRowCount(0);
         ArrayList<NhaCungCap> listNcc = daoNcc.selectAll();
         for (NhaCungCap x : listNcc) {
             Object[] rowData = new Object[]{
                 x.getMaNhaCungCap(),
-                x.getTenNhaCungCap(),
-            };
+                x.getTenNhaCungCap(),};
             dtm.addRow(rowData);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,7 +102,7 @@ public class NhapHangUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Nhập = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txtMaPhieuNhapCT1 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -115,8 +130,6 @@ public class NhapHangUI extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblThungRacPn = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,7 +161,7 @@ public class NhapHangUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(487, Short.MAX_VALUE)
+                .addContainerGap(477, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,10 +230,10 @@ public class NhapHangUI extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Xóa");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Nhập.setText("Nhập");
+        Nhập.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                NhậpActionPerformed(evt);
             }
         });
 
@@ -232,6 +245,12 @@ public class NhapHangUI extends javax.swing.JFrame {
         });
 
         jLabel14.setText("Mã phiếu nhập chi tiết ");
+
+        txtSoLuong1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSoLuong1FocusLost(evt);
+            }
+        });
 
         jLabel16.setText("Số lượng hàng nhập :  ");
 
@@ -310,14 +329,16 @@ public class NhapHangUI extends javax.swing.JFrame {
                                         .addGap(118, 118, 118)
                                         .addComponent(cbbMaGach, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtSoLuong1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                                .addComponent(Nhập, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(41, 41, 41)))
                                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                                .addGap(33, 33, 33)
+                                                .addGap(36, 36, 36)
                                                 .addComponent(jButton6)
-                                                .addGap(73, 73, 73)
+                                                .addGap(70, 70, 70)
                                                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel8Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -355,13 +376,14 @@ public class NhapHangUI extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaPhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtMaPhieuNhapCT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel1)
-                    .addComponent(cbbMaGach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtMaPhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14)
+                        .addComponent(txtMaPhieuNhapCT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)
+                        .addComponent(cbbMaGach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -392,7 +414,7 @@ public class NhapHangUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton5)
+                    .addComponent(Nhập)
                     .addComponent(jButton6)
                     .addComponent(btnThoat))
                 .addGap(49, 49, 49))
@@ -468,7 +490,7 @@ public class NhapHangUI extends javax.swing.JFrame {
         Tab1Layout.setHorizontalGroup(
             Tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 1442, Short.MAX_VALUE)
         );
         Tab1Layout.setVerticalGroup(
             Tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,42 +515,16 @@ public class NhapHangUI extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tblThungRacPn);
 
-        jButton9.setText("Khôi phục");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("Xóa");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1308, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1430, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton10)
-                .addGap(18, 18, 18)
-                .addComponent(jButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -562,21 +558,19 @@ public class NhapHangUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) this.tblPhieuNhap.getModel();
         dtm.setRowCount(0);
         try {
-            ArrayList<PhieuNhap> listPhieuNhap = this.daoPn.selectAll();
+
             ArrayList<PhieuNhapChiTiet> listPhieuNhapChiTiet = this.daoPnct.selectAll();
             for (PhieuNhapChiTiet pnct : listPhieuNhapChiTiet) {
-                for (PhieuNhap pn : listPhieuNhap) {
-                    if (pnct.isTrangThai() && pn.isTrangThai()) {
-                        Object[] rowData = new Object[]{
-                            pn.getMaPhieuNhap(),
-                            pnct.getMaPhieuNhapChiTiet(),
-                            pn.getNgayNhap(),
-                            pn.getMaNhaCungCap(),
-                            pnct.getMaGach(),
-                            pnct.getSoluong(),
-                            pnct.getGiaNhap(),};
-                        dtm.addRow(rowData);
-                    }
+                if (pnct.isTrangThai()) {
+                    Object[] rowData = new Object[]{
+                        pnct.getMaPhieuNhap(),
+                        pnct.getMaPhieuNhapChiTiet(),
+                        pnct.getNgayNhap(),
+                        pnct.getMaNhaCungCap(),
+                        pnct.getMaGach(),
+                        pnct.getSoluong(),
+                        pnct.getGiaNhap(),};
+                    dtm.addRow(rowData);
                 }
             }
         } catch (Exception e) {
@@ -588,21 +582,19 @@ public class NhapHangUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) this.tblThungRacPn.getModel();
         dtm.setRowCount(0);
         try {
-            ArrayList<PhieuNhap> listPhieuNhap = this.daoPn.selectAll();
+
             ArrayList<PhieuNhapChiTiet> listPhieuNhapChiTiet = this.daoPnct.selectAll();
-            for (PhieuNhap pn : listPhieuNhap) {
-                for (PhieuNhapChiTiet pnct : listPhieuNhapChiTiet) {
-                    if (!pnct.isTrangThai() && !pn.isTrangThai()) {
-                        Object[] rowData = new Object[]{
-                            pn.getMaPhieuNhap(),
-                            pnct.getMaPhieuNhapChiTiet(),
-                            pn.getNgayNhap(),
-                            pn.getMaNhaCungCap(),
-                            pnct.getMaGach(),
-                            pnct.getSoluong(),
-                            pnct.getGiaNhap(),};
-                        dtm.addRow(rowData);
-                    }
+            for (PhieuNhapChiTiet pnct : listPhieuNhapChiTiet) {
+                if (!pnct.isTrangThai()) {
+                    Object[] rowData = new Object[]{
+                        pnct.getMaPhieuNhap(),
+                        pnct.getMaPhieuNhapChiTiet(),
+                        pnct.getNgayNhap(),
+                        pnct.getMaNhaCungCap(),
+                        pnct.getMaGach(),
+                        pnct.getSoluong(),
+                        pnct.getGiaNhap(),};
+                    dtm.addRow(rowData);
                 }
             }
         } catch (Exception e) {
@@ -612,7 +604,6 @@ public class NhapHangUI extends javax.swing.JFrame {
 
     private PhieuNhap getForm() {
         PhieuNhap pn = new PhieuNhap();
-        pn.setMaPhieuNhap(txtMaPhieuNhap.getText());
         pn.setNgayNhap(txtNgayNhap.getDate());
         pn.setMaNhaCungCap(txtNhaCungCap.getText());
         pn.setTrangThai(true);
@@ -627,14 +618,49 @@ public class NhapHangUI extends javax.swing.JFrame {
     }
 
     private void ThemPn() {
-        if (MsgBox.confirm(this, "bạn có muốn thêm phiếu nhập không ?")) {
+        if (this.txtNgayNhap.getDateFormatString().equals("") || this.txtSoLuong1.getText().equals("") || this.txtGiaNhap.getText().equals("")) {
+            MsgBox.alert(this, "Không được để trống");
+            return;
         }
-        Gach gach = getFormGach();
-        try {
-            daoGach.capNhatSoLuong(gach);
-            MsgBox.alert(this, "Thêm thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (this.txtMaPhieuNhap.getText().equals("")) {
+            PhieuNhap pn = getForm();
+            try {
+                daoPn.them(pn);
+                MsgBox.alert(this, "Thêm phiếu nhập thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.LayMa();
+            PhieuNhapChiTiet pnct = getFormPnct();
+            try {
+                daoPnct.them(pnct);
+                MsgBox.alert(this, "Đã thêm phiếu nhập chi tiết");
+                HienThiLenTablePhieuNhap();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Gach g = getFormGach();
+            try {
+                daoGach.capNhatSoLuong(g);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.LayMa();
+            PhieuNhapChiTiet pnct = getFormPnct();
+            try {
+                daoPnct.them(pnct);
+                MsgBox.alert(this, "Đã thêm phiếu nhập chi tiết");
+                HienThiLenTablePhieuNhap();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Gach g = getFormGach();
+            try {
+                daoGach.capNhatSoLuong(g);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -655,18 +681,18 @@ public class NhapHangUI extends javax.swing.JFrame {
     }
 
     private void XoaPn() {
-        if (MsgBox.confirm(this, "Bạn có muốn xóa mã phiếu nhập này không")) {
-        }
-        String ma = this.txtMaPhieuNhapCT1.getText();
-        String maPn = this.txtMaPhieuNhap.getText();
-        try {
-            daoPnct.xoa(ma);
-            this.HienThiLenTablePhieuNhap();
-            this.HienThiLenThungRac();
-            MsgBox.alert(this, "Xóa thành công");
-            this.XoaFormPm();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (MsgBox.confirm(this, "Xác nhận phiếu nhập")) {
+            String ma = this.txtMaPhieuNhapCT1.getText();
+            String maPn = this.txtMaPhieuNhap.getText();
+            try {
+                daoPnct.xoa(ma);
+                this.HienThiLenTablePhieuNhap();
+                this.HienThiLenThungRac();
+                MsgBox.alert(this, "Nhập thành công");
+                this.XoaFormPm();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -712,31 +738,16 @@ public class NhapHangUI extends javax.swing.JFrame {
 
 
     private void txtNhaCungCapFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNhaCungCapFocusLost
- 
+
     }//GEN-LAST:event_txtNhaCungCapFocusLost
     private void XoaFormPnct() {
         this.txtMaPhieuNhapCT1.setText("");
         this.txtSoLuong1.setText("");
         this.txtGiaNhap.setText("");
     }
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void NhậpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhậpActionPerformed
         this.XoaPn();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (MsgBox.confirm(this, "bạn có muốn khôi phục dữ liệu không")) {
-        }
-//        PhieuNhap pn1 = daoPn.selectByID(tblThungRacPn.getValueAt(tblThungRacPn.getSelectedRow(), 0).toString());
-        PhieuNhapChiTiet pnct1 = daoPnct.selectByID(tblThungRacPn.getValueAt(tblThungRacPn.getSelectedRow(), 1).toString());
-//        pn1.setTrangThai(true);
-        pnct1.setTrangThai(true);
-//        daoPn.capNhat(pn1);
-        daoPnct.capNhat(pnct1);
-        HienThiLenTablePhieuNhap();
-        HienThiLenThungRac();
-        HienThiLenTablePhieuNhap();
-
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_NhậpActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         HienThiLenTablePhieuNhap();
@@ -760,7 +771,6 @@ public class NhapHangUI extends javax.swing.JFrame {
     private PhieuNhapChiTiet getFormPnct() {
         PhieuNhapChiTiet pnct = new PhieuNhapChiTiet();
         pnct.setMaPhieuNhap(this.txtMaPhieuNhap.getText());
-        pnct.setMaPhieuNhapChiTiet(txtMaPhieuNhapCT1.getText());
         pnct.setMaGach(cbbMaGach.getSelectedItem().toString());
         pnct.setSoluong(Integer.parseInt(txtSoLuong1.getText()));
         pnct.setGiaNhap(Integer.parseInt(txtGiaNhap.getText()));
@@ -769,20 +779,6 @@ public class NhapHangUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-
-        if (MsgBox.confirm(this, "Bạn có muốn xóa vĩnh viễn phiếu nhập này")) {
-        }
-        PhieuNhapChiTiet pnct1 = daoPnct.selectByID(tblThungRacPn.getValueAt(tblThungRacPn.getSelectedRow(), 1).toString());
-        try {
-            daoPnct.xoaVinhVien(pnct1.getMaPhieuNhapChiTiet());
-            MsgBox.alert(this, "Xóa thành công");
-            HienThiLenTablePhieuNhap();
-            HienThiLenThungRac();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void txtNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaCungCapActionPerformed
         // TODO add your handling code here:
@@ -793,22 +789,22 @@ public class NhapHangUI extends javax.swing.JFrame {
         NhaCungCap ncc = daoNcc.selectByName(ma);
         dtm = (DefaultTableModel) this.tblNcc.getModel();
         dtm.setRowCount(0);
-        if(ncc.getTenNhaCungCap().trim().equals(ma)){
+        if (ncc.getTenNhaCungCap().trim().equals(ma)) {
             this.txtNhaCungCap.setText(ncc.getMaNhaCungCap());
             dtm.addRow(new Object[]{
                 ncc.getMaNhaCungCap(),
-                ncc.getTenNhaCungCap(),
-            });
+                ncc.getTenNhaCungCap(),});
         }
     }//GEN-LAST:event_cbbTenNhaCCItemStateChanged
 
     private void cbbMaGachItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbMaGachItemStateChanged
-       String ma = this.cbbMaGach.getSelectedItem().toString();
-       Gach g = daoGach.selectByID(ma);
-       if(g.getMaGach().trim().equals(ma)){
-           this.txtTenGach.setText(g.getTenGach());
-           this.txtNhaCungCap.setText(g.getMaNhaCungCap());
-       }
+        String ma = this.cbbMaGach.getSelectedItem().toString();
+        Gach g = daoGach.selectByID(ma);
+        if (g.getMaGach().trim().equals(ma)) {
+            this.txtTenGach.setText(g.getTenGach());
+            this.txtNhaCungCap.setText(g.getMaNhaCungCap());
+            this.txtSoLuonghangTrongKho.setText(g.getSoLuong());
+        }
         ChatLieu cl = daoCl.selectByID(g.getMaChatLieu());
         this.txtChatLieu.setText(cl.getTenChatLieu());
         KichThuoc kt = daoKt.selectByID(g.getMaDv());
@@ -818,6 +814,13 @@ public class NhapHangUI extends javax.swing.JFrame {
     private void txtChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChatLieuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtChatLieuActionPerformed
+
+    private void txtSoLuong1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuong1FocusLost
+        int SoLuongNhap = Integer.parseInt(this.txtSoLuong1.getText());
+        int SLHang = Integer.parseInt(this.txtSoLuonghangTrongKho.getText());
+        int SLMoi = SoLuongNhap + SLHang;
+        this.txtSoLuonghangTrongKho.setText(String.valueOf(SLMoi));
+    }//GEN-LAST:event_txtSoLuong1FocusLost
 
     /**
      * @param args the command line arguments
@@ -855,16 +858,14 @@ public class NhapHangUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Nhập;
     private javax.swing.JPanel Tab1;
     private javax.swing.JButton btnThoat;
     private javax.swing.JComboBox<String> cbbMaGach;
     private javax.swing.JComboBox<String> cbbTenNhaCC;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
