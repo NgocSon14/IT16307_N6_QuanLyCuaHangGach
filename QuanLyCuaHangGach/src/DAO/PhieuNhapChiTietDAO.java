@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
 
-    String SELECT_ALL_SQL = "select * from PHIEUNHAPCHITIET";
+    String SELECT_ALL_SQL = "select * from PHIEUNHAPCHITIET INNER JOIN PHIEUNHAP ON PHIEUNHAPCHITIET.MAPHIEUNHAP = PHIEUNHAP.MAPHIEUNHAP";
     String SELECT_BY_ID_SQL = "select * from PHIEUNHAPCHITIET where MAPHIEUNHAPCHITIET =?";
     String INSERT_SQL = "insert into PHIEUNHAPCHITIET(MAPHIEUNHAP,MAGACH,SOLUONG,GIANHAP,GIABAN,TRANGTHAI) values(?,?,?,?,?,?)";
     String DELETE_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAPCHITIET = ?";
     String DELETE_PNCT_SQL = "UPDATE PHIEUNHAPCHITIET SET TRANGTHAI = 0 WHERE MAPHIEUNHAPCHITIET = ?";
     String UPDATE_SQL = "update PHIEUNHAPCHITIET set MAPHIEUNHAP = ?, MAGACH = ?, SOLUONG=?, GIANHAP=?,GIABAN=? where MAPHIEUNHAPCHITIET = ?";
     String DELETE_VV_SQL = "DELETE PHIEUNHAPCHITIET WHERE MAPHIEUNHAPCHITIET = ?";
+    
     public void xoaVinhVien(String key) {
         jdbcHelper.update(DELETE_VV_SQL, key);
     }
@@ -63,6 +64,8 @@ public class PhieuNhapChiTietDAO extends DAO<PhieuNhapChiTiet, String>{
                 entity.setGiaNhap(rs.getFloat("GIANHAP"));
                 entity.setGiaBan(rs.getFloat("GIABAN"));
                 entity.setTrangThai(rs.getBoolean("TRANGTHAI"));
+                entity.setMaNhaCungCap(rs.getString("MANHACUNGCAP"));
+                entity.setNgayNhap(rs.getDate("NGAYNHAP"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
