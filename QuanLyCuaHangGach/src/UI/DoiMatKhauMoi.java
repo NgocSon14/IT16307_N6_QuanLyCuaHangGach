@@ -15,6 +15,7 @@ public class DoiMatKhauMoi extends javax.swing.JFrame {
         this.txtTaiKhoan.setEnabled(false);
         this.txtTaiKhoan.setText(ShareUser.user.getTaiKhoan());
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(2);
     }
 
     /**
@@ -40,7 +41,7 @@ public class DoiMatKhauMoi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -59,6 +60,7 @@ public class DoiMatKhauMoi extends javax.swing.JFrame {
             }
         });
 
+        btnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Anh/Refresh.png"))); // NOI18N
         btnDoiMatKhau.setText("ĐỔI MẬT KHẨU ");
         btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +68,7 @@ public class DoiMatKhauMoi extends javax.swing.JFrame {
             }
         });
 
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Anh/Delete.png"))); // NOI18N
         btnHuy.setText("HỦY");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +121,7 @@ public class DoiMatKhauMoi extends javax.swing.JFrame {
                     .addComponent(txtNhapLaiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(ckbHienThiMK)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDoiMatKhau)
                     .addComponent(btnHuy))
