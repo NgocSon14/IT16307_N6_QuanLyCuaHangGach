@@ -133,7 +133,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         cbbnam = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cbbthang = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -230,20 +229,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
         );
 
-        jTabbedPane1.addTab("DOANH THU THÁNG ", jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1174, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("DOANH THU CÁC NĂM ", jPanel2);
+        jTabbedPane1.addTab("DOANH THU  ", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -309,7 +295,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblTien;
