@@ -25,7 +25,7 @@ public class NhaCungCapUI extends javax.swing.JFrame {
         prepareGui();
         fillDS();
         fillLT();
-
+        setDefaultCloseOperation(2);
     }
 
     void init() {

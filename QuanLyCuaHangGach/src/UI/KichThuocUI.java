@@ -29,6 +29,7 @@ public class KichThuocUI extends javax.swing.JFrame {
         init();
         setLocationRelativeTo(null);
         this.txtMaKT.setEnabled(false);
+        setDefaultCloseOperation(2);
     }
     public void init(){
         setTitle("Quản lý kích thước gạch");

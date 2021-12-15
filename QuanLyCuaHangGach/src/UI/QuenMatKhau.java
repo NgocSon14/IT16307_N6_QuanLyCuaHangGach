@@ -25,6 +25,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     public QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(2);
     }
 
     /**

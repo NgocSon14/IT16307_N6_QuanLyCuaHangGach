@@ -28,6 +28,7 @@ public class QuanLyKhacHang extends javax.swing.JFrame {
      */
     public QuanLyKhacHang() {
         initComponents();
+        setDefaultCloseOperation(2);
         init();
         prepareGui();
         fillDS();
@@ -522,7 +523,7 @@ public class QuanLyKhacHang extends javax.swing.JFrame {
         kh.setTrangThai(true);
         return kh;
     }
-    
+
     void insert() {
         KhachHang kh = getform();
         try {

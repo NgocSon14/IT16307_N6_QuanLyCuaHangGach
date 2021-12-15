@@ -33,6 +33,7 @@ public class PhieuXuatUI extends javax.swing.JFrame {
 
     public PhieuXuatUI() {
         initComponents();
+        setDefaultCloseOperation(2);
         this.setLocationRelativeTo(null);
         HienThiLenTablePhieuXuat();
         HienThiLenTableThungRacPn();

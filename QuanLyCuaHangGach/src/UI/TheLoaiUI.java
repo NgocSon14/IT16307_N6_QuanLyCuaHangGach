@@ -27,6 +27,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
     public TheLoaiUI() {
         initComponents();
         init();
+        setDefaultCloseOperation(2);
     }
 
     public void init() {
@@ -177,7 +178,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
         }
         dtm = (DefaultTableModel) tblTheLoai.getModel();
         int index = tblTheLoai.getSelectedRow();
-        if(index < 0){
+        if (index < 0) {
             return;
         }
         this.txtMaTheLoai.setText(dtm.getValueAt(index, 0).toString());
@@ -192,8 +193,7 @@ public class TheLoaiUI extends javax.swing.JFrame {
                     || x.getTenTheLoai().toString().contains(this.txtTimKiem.getText().trim())) {
                 dtm.addRow(new Object[]{
                     x.getMaTheLoai(),
-                    x.getTenTheLoai(),
-                });
+                    x.getTenTheLoai(),});
             }
         }
     }//GEN-LAST:event_txtTimKiemActionPerformed

@@ -44,6 +44,7 @@ public class NhapHangUI extends javax.swing.JFrame {
         this.txtKichThuoc.setEnabled(false);
         this.NewCbbNcc();
         this.NewCbbGach();
+        setDefaultCloseOperation(2);
         HienThiNhaCc();
     }
 
@@ -419,11 +420,12 @@ public class NhapHangUI extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(Nhập)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3)
+                        .addComponent(Nhập)
+                        .addComponent(jButton6)))
                 .addGap(49, 49, 49))
         );
 
