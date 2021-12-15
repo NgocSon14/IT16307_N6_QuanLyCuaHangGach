@@ -10,6 +10,7 @@ import DAO.KhachHangDao;
 import Entity.KhachHang;
 import Helper.MsgBox;
 import java.util.ArrayList;
+import Helper.Check1;
 
 /**
  *
@@ -362,6 +363,8 @@ public class QuanLyKhacHang extends javax.swing.JFrame {
 
     private void btnxoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoa1ActionPerformed
         // TODO add your handling code here:
+        if (Check1.checkNullText(txtmakh)
+                && Check1.checkSDT(txtsdt))
         insert();
     }//GEN-LAST:event_btnxoa1ActionPerformed
 

@@ -13,6 +13,7 @@ import Entity.ChatLieu;
 import Entity.KichThuoc;
 import Entity.NhaCungCap;
 import Entity.TheLoai;
+import Helper.Check1;
 import Helper.Image;
 import Helper.MsgBox;
 import java.io.File;
@@ -359,6 +360,9 @@ public class BangGiaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtgiagachActionPerformed
 
     private void btncapnhapgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhapgiaActionPerformed
+        if (Check1.checkNullText(txttengach)
+                && Check1.checkDiem(txtgiagach)
+                && Check1.checkDiem(txtsoluong))
         them();
     }//GEN-LAST:event_btncapnhapgiaActionPerformed
 
