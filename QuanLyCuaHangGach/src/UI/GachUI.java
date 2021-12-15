@@ -50,6 +50,7 @@ public class GachUI extends javax.swing.JFrame {
         showdonvi();
         showtheloai();
         this.tftmagach.setEnabled(false);
+        setDefaultCloseOperation(2);
     }
 
     void init() {

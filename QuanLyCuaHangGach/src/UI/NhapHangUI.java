@@ -45,6 +45,7 @@ public class NhapHangUI extends javax.swing.JFrame {
         this.txtKichThuoc.setEnabled(false);
         this.NewCbbNcc();
         this.NewCbbGach();
+        setDefaultCloseOperation(2);
         HienThiNhaCc();
     }
 

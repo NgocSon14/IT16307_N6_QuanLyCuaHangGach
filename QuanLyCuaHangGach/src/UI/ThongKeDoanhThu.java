@@ -2,11 +2,18 @@ package UI;
 
 import DAO.DoanhThuDAO;
 import Entity.DoanhThu;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ThongKeDoanhThu extends javax.swing.JPanel {
 
@@ -108,7 +115,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         for (int i = 0; i < tblDoanhThuThang.getRowCount(); i++) { // lấy dữ lệu ở các row
             Tong += Integer.parseInt(tblDoanhThuThang.getValueAt(i, 3).toString()); // thực hiện cộng
         }
-        lblTien.setText("Tổng Doanh Thu Của Tháng: " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
+        lblTien.setText("Tổng Doanh Thu : " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
 
     }
 
@@ -127,8 +134,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDoanhThuThang = new javax.swing.JTable();
         lblTien = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbbnam = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -156,16 +161,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 
         lblTien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel3.setText("TỔNG :");
-
-        jButton2.setText("BIỂU ĐỒ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Năm");
 
         cbbnam.addActionListener(new java.awt.event.ActionListener() {
@@ -191,11 +186,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(24, 609, Short.MAX_VALUE)
                         .addComponent(lblTien, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -221,12 +212,8 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addGap(18, 18, 18))
+                .addComponent(lblTien, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("DOANH THU  ", jPanel1);
@@ -251,10 +238,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     private void cbbnamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbnamActionPerformed
         fillComboBoxThang();        // TODO add your handling code here:
     }//GEN-LAST:event_cbbnamActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -290,9 +273,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbnam;
     private javax.swing.JComboBox<String> cbbthang;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -340,7 +340,7 @@ public class Main extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         if (tkdt == null) {
             tkdt = new ThongKeDoanhThu();
-            tabToTab.addTab("Quản lí đọc giả", tkdt);
+            tabToTab.addTab("Thống kê", tkdt);
         }
         tabToTab.setSelectedComponent(tkdt);
     }//GEN-LAST:event_jLabel8MouseClicked
