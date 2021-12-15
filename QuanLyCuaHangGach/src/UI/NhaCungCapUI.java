@@ -4,6 +4,7 @@ package UI;
 import javax.swing.table.DefaultTableModel;
 import DAO.NhaCungCapDao;
 import Entity.NhaCungCap;
+import Helper.Check1;
 import Helper.MsgBox;
 import java.util.ArrayList;
 
@@ -520,6 +521,11 @@ public class NhaCungCapUI extends javax.swing.JFrame {
 
     private void btnxoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoa1ActionPerformed
         // TODO add your handling code here:
+        if (Check1.checkName(txttenncc)
+                &&Check1.checkNullText(txtdiachi)
+                &&Check1.checkEmail(txtemail)
+                && Check1.checkSDT(txtsdt)
+                )
         insert();
     }//GEN-LAST:event_btnxoa1ActionPerformed
 
