@@ -755,12 +755,9 @@ public class NhapHangUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tblPhieuNhapMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//        if (Check1.checkName(txtNhaCungCap)
-//                &&Check1.checkEmail(txtemail)
-//                && Check1.checkSDT(txtsdt)
-//                )
+
         ThemPn();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         XoaFormPm();
