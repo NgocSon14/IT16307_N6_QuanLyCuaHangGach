@@ -5,6 +5,8 @@
  */
 package UI;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
@@ -339,7 +341,11 @@ public class Main extends javax.swing.JFrame {
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         if (tkdt == null) {
-            tkdt = new ThongKeDoanhThu();
+            try {
+                tkdt = new ThongKeDoanhThu();
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
             tabToTab.addTab("Thống kê", tkdt);
         }
         tabToTab.setSelectedComponent(tkdt);
