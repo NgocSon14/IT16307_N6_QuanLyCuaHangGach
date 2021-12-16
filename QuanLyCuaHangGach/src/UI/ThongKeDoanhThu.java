@@ -2,10 +2,19 @@ package UI;
 
 import DAO.DoanhThuDAO;
 import Entity.DoanhThu;
+import Entity.KhachHang;
+import Entity.ThongKeKH;
+import Entity.ThongKeSP;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -21,13 +30,22 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     DefaultTableModel dtm;
     double Tong = 0;
     ArrayList<DoanhThu> listDt;
+    Connection cn;
+     ArrayList<ThongKeKH> Listkh= new ArrayList<>();
+     ArrayList<ThongKeSP> ListSp= new ArrayList<>();
+    
 
-    public ThongKeDoanhThu() {
+    public ThongKeDoanhThu() throws Exception {
         initComponents();
 //        HienThiLenTableDTT();
         fillComboxNam();
 //fillTableDoanhThu();
         fillComboBoxThang();
+        cn=Helper.jdbcHelper.opConnection();
+        fillKhachhang();
+        filltbkhachhang();
+        fillSanpham();
+        filltbSP();
 
     }
 //    private void HienThiLenTableDTT(){
@@ -118,6 +136,56 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         lblTien.setText("Tổng Doanh Thu : " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
 
     }
+    void fillKhachhang(){
+        try {
+    cn=Helper.jdbcHelper.opConnection();
+    String sql ="SELECT TOP 10 KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL FROM dbo.KHACHHANG JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAKHACHHANG = KHACHHANG.MAKHACHHANG GROUP BY KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL";
+    Statement stm= cn.createStatement();
+    ResultSet rs=stm.executeQuery(sql);
+    while(rs.next()){
+ Listkh.add(new ThongKeKH(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4))); 
+    }
+            System.out.println(Listkh);
+         
+    stm.close();
+    rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    void filltbkhachhang(){
+    DefaultTableModel model = (DefaultTableModel) tblkhachhang.getModel();
+    model.setRowCount(0);
+        for (ThongKeKH x : Listkh) {
+            Object[] rowData= new Object[]{x.getMaKH(),x.getTenKH(),x.getSDT(),x.getEmail()};
+           model.addRow(rowData);
+        }
+    }
+    void fillSanpham(){
+        try {
+             cn=Helper.jdbcHelper.opConnection();
+             String sql="SELECT TOP 10 GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP,GIABAN FROM dbo.GACH JOIN dbo.NHACUNGCAP ON NHACUNGCAP.MANHACUNGCAP = GACH.MANHACUNGCAP JOIN dbo.PHIEUXUAT ON PHIEUXUAT.TRANGTHAI = GACH.TRANGTHAI JOIN dbo.PHIEUXUATCHITIET ON PHIEUXUATCHITIET.MAGACH = GACH.MAGACH JOIN dbo.CHATLIEU ON CHATLIEU.MACHATLIEU = GACH.MACHATLIEU JOIN dbo.DONVITINH ON DONVITINH.MADONVI = GACH.MADONVI GROUP BY GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP,GIABAN";
+             Statement stm=cn.createStatement();
+              ResultSet rs=stm.executeQuery(sql);
+    while(rs.next()){
+ ListSp.add(new ThongKeSP(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6))); 
+    }
+            System.out.println(ListSp);
+         
+    stm.close();
+    rs.close();
+             
+        } catch (Exception e) {
+        }
+    }
+    void filltbSP(){
+ DefaultTableModel model = (DefaultTableModel) tblsanpham.getModel();
+    model.setRowCount(0);
+        for (ThongKeSP x : ListSp) {
+            Object[] rowData= new Object[]{x.getMagach(),x.getTengach(),x.getTenchatlieu(),x.getTendv(),x.getTenncc(),x.getGiaban()};
+           model.addRow(rowData);
+        }
+}
 
 //   
     /**
@@ -138,6 +206,12 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         cbbnam = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cbbthang = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblkhachhang = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblsanpham = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -218,6 +292,69 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("DOANH THU  ", jPanel1);
 
+        tblkhachhang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã Khách Hàng", "Tên Khách Hàng", "SĐT", "Email"
+            }
+        ));
+        jScrollPane2.setViewportView(tblkhachhang);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("KHACHHANG", jPanel2);
+
+        tblsanpham.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã gạch", "Tên gạch", "Tên chất liệu", "Tên đơn vị", "Tên nhà cung cấp", "Giá bán"
+            }
+        ));
+        jScrollPane3.setViewportView(tblsanpham);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 67, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("SANPHAM", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,7 +403,11 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongKeDoanhThu().setVisible(true);
+                try {
+                    new ThongKeDoanhThu().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(ThongKeDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -276,9 +417,15 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblTien;
     private javax.swing.JTable tblDoanhThuThang;
+    private javax.swing.JTable tblkhachhang;
+    private javax.swing.JTable tblsanpham;
     // End of variables declaration//GEN-END:variables
 }
