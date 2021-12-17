@@ -31,9 +31,8 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
     double Tong = 0;
     ArrayList<DoanhThu> listDt;
     Connection cn;
-     ArrayList<ThongKeKH> Listkh= new ArrayList<>();
-     ArrayList<ThongKeSP> ListSp= new ArrayList<>();
-    
+    ArrayList<ThongKeKH> Listkh = new ArrayList<>();
+    ArrayList<ThongKeSP> ListSp = new ArrayList<>();
 
     public ThongKeDoanhThu() throws Exception {
         initComponents();
@@ -41,7 +40,7 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         fillComboxNam();
 //fillTableDoanhThu();
         fillComboBoxThang();
-        cn=Helper.jdbcHelper.opConnection();
+        cn = Helper.jdbcHelper.opConnection();
         fillKhachhang();
         filltbkhachhang();
         fillSanpham();
@@ -100,7 +99,6 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         if (cbb.equals("null") || year.equals("null")) {
             return;
         } else {
-            System.out.println(cbbthang.getSelectedItem());
 
             int thang = Integer.parseInt(cbb);
             int nam = Integer.parseInt(year);
@@ -136,56 +134,59 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
         lblTien.setText("Tổng Doanh Thu : " + x.format(this.Tong) + " " + "VND");// Áp dụng mẫu x= "###,###.##" cho decimalFormat
 
     }
-    void fillKhachhang(){
+
+    void fillKhachhang() {
         try {
-    cn=Helper.jdbcHelper.opConnection();
-    String sql ="SELECT TOP 10 KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL FROM dbo.KHACHHANG JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAKHACHHANG = KHACHHANG.MAKHACHHANG GROUP BY KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL";
-    Statement stm= cn.createStatement();
-    ResultSet rs=stm.executeQuery(sql);
-    while(rs.next()){
- Listkh.add(new ThongKeKH(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4))); 
-    }
-            System.out.println(Listkh);
-         
-    stm.close();
-    rs.close();
+            cn = Helper.jdbcHelper.opConnection();
+            String sql = "SELECT TOP 10 KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL FROM dbo.KHACHHANG JOIN dbo.PHIEUXUAT ON PHIEUXUAT.MAKHACHHANG = KHACHHANG.MAKHACHHANG GROUP BY KHACHHANG.MAKHACHHANG,TENKHACHHANG,SODIENTHOAI,EMAIL";
+            Statement stm = cn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Listkh.add(new ThongKeKH(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+
+            stm.close();
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    void filltbkhachhang(){
-    DefaultTableModel model = (DefaultTableModel) tblkhachhang.getModel();
-    model.setRowCount(0);
+
+    void filltbkhachhang() {
+        DefaultTableModel model = (DefaultTableModel) tblkhachhang.getModel();
+        model.setRowCount(0);
         for (ThongKeKH x : Listkh) {
-            Object[] rowData= new Object[]{x.getMaKH(),x.getTenKH(),x.getSDT(),x.getEmail()};
-           model.addRow(rowData);
+            Object[] rowData = new Object[]{x.getMaKH(), x.getTenKH(), x.getSDT(), x.getEmail()};
+            model.addRow(rowData);
         }
     }
-    void fillSanpham(){
+
+    void fillSanpham() {
         try {
-             cn=Helper.jdbcHelper.opConnection();
-             String sql="SELECT TOP 10 GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP,GIABAN FROM dbo.GACH JOIN dbo.NHACUNGCAP ON NHACUNGCAP.MANHACUNGCAP = GACH.MANHACUNGCAP JOIN dbo.PHIEUXUAT ON PHIEUXUAT.TRANGTHAI = GACH.TRANGTHAI JOIN dbo.PHIEUXUATCHITIET ON PHIEUXUATCHITIET.MAGACH = GACH.MAGACH JOIN dbo.CHATLIEU ON CHATLIEU.MACHATLIEU = GACH.MACHATLIEU JOIN dbo.DONVITINH ON DONVITINH.MADONVI = GACH.MADONVI GROUP BY GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP,GIABAN";
-             Statement stm=cn.createStatement();
-              ResultSet rs=stm.executeQuery(sql);
-    while(rs.next()){
- ListSp.add(new ThongKeSP(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6))); 
-    }
+            cn = Helper.jdbcHelper.opConnection();
+            String sql = "SELECT TOP 10 GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP FROM dbo.GACH JOIN dbo.NHACUNGCAP ON NHACUNGCAP.MANHACUNGCAP = GACH.MANHACUNGCAP JOIN dbo.PHIEUXUAT ON PHIEUXUAT.TRANGTHAI = GACH.TRANGTHAI JOIN dbo.PHIEUXUATCHITIET ON PHIEUXUATCHITIET.MAGACH = GACH.MAGACH JOIN dbo.CHATLIEU ON CHATLIEU.MACHATLIEU = GACH.MACHATLIEU JOIN dbo.DONVITINH ON DONVITINH.MADONVI = GACH.MADONVI GROUP BY GACH.MAGACH,TENGACH,TENCHATLIEU,TENDONVI,TENNHACUNGCAP";
+            Statement stm = cn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                ListSp.add(new ThongKeSP(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
             System.out.println(ListSp);
-         
-    stm.close();
-    rs.close();
-             
+
+            stm.close();
+            rs.close();
+
         } catch (Exception e) {
         }
     }
-    void filltbSP(){
- DefaultTableModel model = (DefaultTableModel) tblsanpham.getModel();
-    model.setRowCount(0);
+
+    void filltbSP() {
+        DefaultTableModel model = (DefaultTableModel) tblsanpham.getModel();
+        model.setRowCount(0);
         for (ThongKeSP x : ListSp) {
-            Object[] rowData= new Object[]{x.getMagach(),x.getTengach(),x.getTenchatlieu(),x.getTendv(),x.getTenncc(),x.getGiaban()};
-           model.addRow(rowData);
+            Object[] rowData = new Object[]{x.getMagach(), x.getTengach(), x.getTenchatlieu(), x.getTendv(), x.getTenncc()};
+            model.addRow(rowData);
         }
-}
+    }
 
 //   
     /**
@@ -326,13 +327,13 @@ public class ThongKeDoanhThu extends javax.swing.JPanel {
 
         tblsanpham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã gạch", "Tên gạch", "Tên chất liệu", "Tên đơn vị", "Tên nhà cung cấp", "Giá bán"
+                "Mã gạch", "Tên gạch", "Tên chất liệu", "Tên đơn vị", "Tên nhà cung cấp"
             }
         ));
         jScrollPane3.setViewportView(tblsanpham);

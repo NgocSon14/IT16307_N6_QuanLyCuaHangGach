@@ -11,20 +11,13 @@ package Entity;
  */
 public class ThongKeSP {
     private String magach,tengach,tenchatlieu,tendv,tenncc;
-    private double giaban;
 
-    @Override
-    public String toString() {
-        return "ThongKeSP{" + "magach=" + magach + ", tengach=" + tengach + ", tenchatlieu=" + tenchatlieu + ", tendv=" + tendv + ", tenncc=" + tenncc + ", giaban=" + giaban + '}';
-    }
-
-    public ThongKeSP(String magach, String tengach, String tenchatlieu, String tendv, String tenncc, double giaban) {
+    public ThongKeSP(String magach, String tengach, String tenchatlieu, String tendv, String tenncc) {
         this.magach = magach;
         this.tengach = tengach;
         this.tenchatlieu = tenchatlieu;
         this.tendv = tendv;
         this.tenncc = tenncc;
-        this.giaban = giaban;
     }
 
     public ThongKeSP() {
@@ -70,11 +63,10 @@ public class ThongKeSP {
         this.tenncc = tenncc;
     }
 
-    public double getGiaban() {
-        return giaban;
+    @Override
+    public String toString() {
+        return "ThongKeSP{" + "magach=" + magach + ", tengach=" + tengach + ", tenchatlieu=" + tenchatlieu + ", tendv=" + tendv + ", tenncc=" + tenncc + '}';
     }
 
-    public void setGiaban(double giaban) {
-        this.giaban = giaban;
-    }
+   
 }

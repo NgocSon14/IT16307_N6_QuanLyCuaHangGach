@@ -3,9 +3,9 @@ package Helper;
 
 import java.sql.*;
 public class jdbcHelper {
-    static String url = "jdbc:sqlserver://localhost\\ADMIN:1433;databaseName=QuanLiKho";
+    static String url = "jdbc:sqlserver://localhost\\LAPTOP-SFOPP4EV:1433;databaseName=QuanLiKho";
     static String user = "sa";
-    static String pass = "123";
+    static String pass = "1312002";
     
      public static PreparedStatement getPstm(String sql, Object... args) throws SQLException {
         Connection con = DriverManager.getConnection(url, user, pass);
@@ -54,9 +54,9 @@ public class jdbcHelper {
         }
     }
     public static Connection opConnection() throws Exception {
-        String url = "jdbc:sqlserver://localhost\\ADMIN:1433;databaseName=QuanLiKho;";
+        String url = "jdbc:sqlserver://localhost\\LAPTOP-SFOPP4EV:1433;databaseName=QuanLiKho";
         String user = "sa";
-        String pass = "123";
+        String pass = "1312002";
         Connection con = DriverManager.getConnection(url, user, pass);
         return con;
     }
